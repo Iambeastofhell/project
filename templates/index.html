@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animate</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+            background-color: black;
+            color: white;
+            font-size: medium;
+
+        }
+        .type{
+            overflow: hidden;
+            border-right: 2px solid black;
+            white-space: nowrap;
+            letter-spacing: 0.1em; 
+            margin: 0 auto;
+            animation: typing 3s steps(40, end) forwards, blink .75s step-end infinite;
+            font-size: 50px;
+            text-shadow: #7AF8FF 0px -3px 6px,  #7AF8FF 0px 2px 3px;
+;
+        }
+        @keyframes typing {
+            from{
+                width: 0%;
+            }
+            to{
+                width: 55%;
+            }
+        }
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
+        }
+        .main{
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-image: url('https://e0.pxfuel.com/wallpapers/3/311/desktop-wallpaper-starry-sky-awesome-starry-sky-beautiful-starry-night-sky.jpg');
+            background-size: cover;
+            background-position: center;
+            margin-top: 0;
+            overflow: hidden;
+        }
+        .menu{
+            margin: 15px;
+            border-radius: 20%;
+            padding: 10px;
+            box-shadow:  #7AF8FF 0px -8px 30px,  #7AF8FF 0px 4px 6px;
+            cursor: pointer;
+            text-align: center;
+            height: 50%;
+            z-index: 101;
+        }
+        .menu:hover + ul li{
+            opacity: 1;
+            /* transform: translate(-50%, -50%); */
+        }
+        .menu:focus + ul li{
+            opacity: 1;
+            /* transform: translate(-50%, -50%); */
+        }
+        .nav{
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            background-image: url('https://e0.pxfuel.com/wallpapers/3/311/desktop-wallpaper-starry-sky-awesome-starry-sky-beautiful-starry-night-sky.jpg');
+            background-size: cover;
+            background-position: top;            
+        }
+        .nav ul{
+            list-style-type: none;
+            display: flex;
+            margin: 0;
+        }
+        .nav ul li{
+            margin: 15px;
+            border-radius: 20%;
+            padding: 10px;
+            box-shadow:  #7AF8FF 0px -8px 30px,  #7AF8FF 0px 4px 6px;
+            transition: 1s;
+            opacity: 0;
+
+        }
+        .nav ul li:hover{
+            /* box-shadow: 0 0 30px blue; */
+            /* box-shadow:  #7AF8FF 0px -12px 30px inset,  #7AF8FF 0px 4px 6px inset; */
+            animation: rotate 2s infinite;
+            background-color: #7AF8FF;
+            box-shadow: none;
+            transition: 1s;
+        }
+        a:hover{
+            color: black;
+            transition: 1s;
+        }
+        @keyframes rotate {
+            from{rotate: 0deg;}
+            to{rotate: 360deg;}
+        }
+        a{
+            text-decoration: none;
+            color: white;
+            font-size: large;
+        }
+        .madeby ul{
+            list-style: none;
+            display: flex;
+            gap: 10px;
+        }
+        .madeby ul li{
+            height: 60vh;
+            width: 27vw;
+            border-radius: 20px;
+            box-shadow:  #7AF8FF 0px -8px 30px,  #7AF8FF 0px 4px 6px;
+            padding: 2px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="menu" tabindex="0">Menu</div>
+        <ul>
+            <li><a href="todo">todo</a></li>
+            <li><a href="translate">translate</a></li>
+            <li><a href="play">games</a></li>
+        </ul>
+    </nav>
+    <div class="main">
+        <div class="type">Introduction to programming</div>
+    </div>
+    <div class="madeby">
+        <ul>
+            <li>Vishesh</li>
+            <li>Zeeshan</li>
+            <li>Aswin</li>
+        </ul>
+    </div>
+</body>
+</html>

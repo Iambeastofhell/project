@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe</title>
+    <style>
+        *{
+            background-color: black;
+            color: #ffffff;
+            font-size: 35px;
+        }
+        .cell {
+            width: 70px;
+            height: 70px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 30px;
+            border: 1px solid #ffffff;
+            cursor: pointer;
+        }
+        .cell:hover{
+            box-shadow: rgba(240, 3, 3, 0.8) 0 0 45px 15px;
+            transition: 0.5s;
+        }
+        .body{
+            position: relative;
+        }
+        .main{
+            position: absolute;
+            top: 15%;
+            left: 40%;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+
+        <h1>Tic Tac Toe</h1>
+        <p>Current Player: {{ current_player }}</p>
+        <table>
+            {% for row in range(3) %}
+            <tr>
+                {% for col in range(3) %}
+                <td class="cell" onclick="playMove({{ row * 3 + col }})">{{ board[row * 3 + col] }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <script>
+            function playMove(cellIndex) {
+                document.forms["ticTacToeForm"]["cell"].value = cellIndex;
+                document.forms["ticTacToeForm"].submit();
+            }
+            </script>
+    <form name="ticTacToeForm" method="post">
+        <input type="hidden" name="cell" value="">
+    </form>
+</div>
+</body>
+</html>

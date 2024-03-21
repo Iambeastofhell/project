@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        .invi{
+            opacity: 0;
+        }
+        .big:hover{
+            .invi1{
+                opacity: 1;
+            }
+        }
+        .com:hover{
+            .invi2{
+                opacity: 1;
+            }
+        }
+        .big::-webkit-scrollbar , .com::-webkit-scrollbar{
+             display: none;
+        }
+        
+        .big , .com{
+            -ms-overflow-style: none; 
+            scrollbar-width: none;
+        }
+
+        .big{
+            height: 50vh;
+            width: 40vw;
+            position: fixed;
+            top: 0;
+            right: 0;
+            overflow: scroll;
+        }
+        .com{
+            overflow: scroll;
+            height: 50vh;
+            width: 40vw;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+        }
+        .st{
+            list-style-type: decimal;
+        }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <ul class="st">
+        {% for task in tasks %}
+            <li>{{ task[0] }} <a href="/todo/complete_task/{{ loop.index0 }}">[Complete] </a>  <a href="/todo/update_task/{{ loop.index0 }}">[Update] </a>  {{task[1]}} </li>
+        {% endfor %}
+    </ul>
+    <form action="/todo/add_task" method="post">
+        <input type="text" name="content" placeholder="Enter task">
+        <button type="submit">Add Task</button>
+    </form>
+    <ul class="st">
+        {% for i in completed[::-1][:10] %}
+            <li>{{ i[0] }} (Completed) {{i[1]}}</li>
+        {% endfor %}
+    </ul>
+    <div class="stick">
+        <div class="big">
+            <button class="task">All Tasks</button>
+            <ul class="st invi invi1">
+                {% for i in tasks %}
+                <li>{{i}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="com">
+            <button class="comp">All Completed Tasks</button>
+            <ul class="st invi invi2">
+                {% for i in completed %}
+                <li>{{i}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
