@@ -121,10 +121,11 @@ def todo():
 @app.route('/todo/add_task', methods=['POST'])
 def add_task():
     global datet
-    content = request.form['content']
+    content = request.form.get('content')
+    heading = request.form.get('heading')
     if content!="":
         datet=datetime.now().strftime("%c")
-        tasks.append([content,datet])
+        tasks.append([content,datet,heading])
     return redirect(url_for('todo'))
 
 @app.route('/todo/complete_task/<int:task_id>')
@@ -136,17 +137,28 @@ def complete_task(task_id):
         completed.append(tasks[task_id])
         del tasks[task_id]
     return redirect(url_for('todo'))
-
+updatedid=0
 @app.route('/todo/update_task/<int:task_id>')
 def update_task(task_id):
-    return render_template("updatetodo.html",id=task_id)
+    global updateid
+    updatedid=task_id
+    return redirect(url_for('update'))
 
 @app.route("/updatetodo",  methods=['GET', 'POST'])
-def update(id):
-    new=request.form(['new'])
-    new=new.text
-    tasks[id]=new
-    return redirect(url_for("/todo"))
+def update():
+    newhead=request.form.get('heading')
+    # newhead=newhead.text
+    ntext=request.form.get('note')
+    if newhead!="":
+        tasks[updatedid][2]=newhead
+    elif ntext!="":
+        tasks[updatedid][0]=ntext
+    else:
+        return redirect(url_for("/todo"))
+    dat=datetime.now().strftime("%c")
+    tasks[updatedid][1]=dat
+    return redirect(url_for("todo"))
+
 
 translated=""
 
