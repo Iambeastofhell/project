@@ -205,8 +205,8 @@ def image():
             blur_img.save(f"static/tools/image/blur_{img.filename}")
             return render_template("image.html" ,name=img.filename,out=f"blur_{img.filename}")
         elif op=="rotate":
-
-            rotated_img = img.rotate(90)
+            rotated_img = Image.open(f"static/tools/image/{img.filename}")
+            rotated_img = rotated_img.rotate(90)
             rotated_img.save(f"static/tools/image/rotated_{img.filename}") 
             return render_template("image.html", name=img.filename, out=f"rotated_{img.filename}")
 @app.route("/tools/image")
