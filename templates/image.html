@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image processing</title>
+    <style>
+        .img{
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Upload the image
+    </h1>
+    <form action="/tools/image/post" method="post" enctype="multipart/form-data">
+        <input type="file" id="image" name="image">
+        <select name="op">
+            <option value="greyscale">Greyscale</option>
+            <option value="blur">Blur</option>
+            <option value="rotate">Rotate</option>
+          </select>
+        <button type="submit"> Submit </button>
+    <img class="img" src="{{ url_for('static', filename='tools/image/' + name) }}">
+    <img class="img" src="{{ url_for('static', filename='tools/image/' + out) }}">
+    </form>
+</body>
+</html>

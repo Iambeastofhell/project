@@ -1,6 +1,8 @@
 from flask import Flask,render_template,request,jsonify,redirect,url_for
 from datetime import datetime
 from googletrans import Translator,LANGUAGES
+import os
+from PIL import Image,ImageFilter
 tran=Translator()
 
 app = Flask(__name__)
@@ -185,3 +187,30 @@ def translate():
         return render_template("translate.html", text="No text translated yet")
 # if __name__ == '__main__':
 #     app.run(debug=False,host='0.0.0.0')
+@app.route("/tools/image/post", methods=['POST',"GET"])
+def image():
+    img=request.files['image']
+    op=request.form['op']
+    if img:
+        os.makedirs("static/tools/image", exist_ok=True) 
+        img.save(os.path.join("static/tools/image", img.filename))
+        if op=="greyscale":
+            grayscale_img = Image.open(f"static/tools/image/{img.filename}").convert('L')
+            grayscale_img.save(f"static/tools/image/grayscale_{img.filename}")
+            return render_template("image.html" ,name=img.filename,out=f"grayscale_{img.filename}")
+
+        elif op=="blur":
+            blur_img = Image.open(f"static/tools/image/{img.filename}")
+            blur_img = blur_img.filter(ImageFilter.BoxBlur(15))  
+            blur_img.save(f"static/tools/image/blur_{img.filename}")
+            return render_template("image.html" ,name=img.filename,out=f"blur_{img.filename}")
+        elif op=="rotate":
+
+            rotated_img = img.rotate(90)
+            rotated_img.save(f"static/tools/image/rotated_{img.filename}") 
+            return render_template("image.html", name=img.filename, out=f"rotated_{img.filename}")
+@app.route("/tools/image")
+def img():
+    name=""
+    out=""
+    return render_template("image.html",name=name,out=out)
