@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minesweeper</title>
+</head>
+<body>
+    <h1>Minesweeper</h1>
+    <form id="grid-form">
+        Rows: <input type="number" name="rows" value="8"><br>
+        Columns: <input type="number" name="cols" value="8"><br>
+        <button type="submit">Generate Grid</button>
+    </form>
+    <table id="minesweeper-grid">
+        </table>
+
+    <script>
+        // Fetch grid data on form submit
+        document.getElementById('grid-form').addEventListener('submit', (event) => {
+            // event.preventDefault();  // Prevent default form submission
+            fetch('/generate_board', {
+                method: 'POST',  // ?? found  error here most possibily
+                body: new FormData(event.target)
+            })
+            .then(response => response.json())
+            .then(data => createGrid(data.grid));
+        });
+        function createGrid(rows, cols) {
+  const table = document.getElementById("myGrid");
+
+  for (let row = 0; row < rows; row++) {
+    const tableRow = document.createElement("tr");
+    for (let col = 0; col < cols; col++) {
+      const cell = document.createElement("td");
+      cell.textContent = `Cell (${row}, ${col})`; // Set cell content
+      tableRow.appendChild(cell);
+    }
+    table.appendChild(tableRow);
+  }
+}
+        // Function to handle cell clicks (details omitted for brevity)
+        function handleCellClick(row, col) {
+  // 1. Send AJAX request to server
+  fetch('/reveal_cell', {
+    method: 'POST',
+    body: JSON.stringify({ rows, cols }) // Send row and col data
+  })
+  .then(response => response.json())
+  .then(data => {
+    // 2. Update cell content and state based on server response
+    const cell = $(`#${row}-${col}`); // Select cell element using its ID
+    cell.text(data.revealedValue); // Update cell content with revealed value
+    
+  })
+  .catch(error => console.error(error));
+}
+        createGrid(rows, cols);
+    </script>
+</body>
+</html>
