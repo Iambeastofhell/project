@@ -55,7 +55,7 @@
     <ul class="st">
         {% for task in tasks %}
             <li>
-                <h3>{{ task[2] }}</h3>  {{ task[0] }}  <a href="/todo/complete_task/{{ loop.index0 }}">[Complete]</a>    {{ task[1] }}
+                <h3>{{ task[2] }}</h3>  {{ task[0] }}  <a href="/todo/complete_task/{{ loop.index0 }}"> Complete </a> <a href="/todo/delete_task/{{ loop.index0 }}"> Delete </a>    {{ task[1] }}
                 <form method="POST" action="/todo/update_task/{{ loop.index0 }}" class="update-form hidden">
                     <input type="hidden" name="task_index" value="{{ loop.index0 }}">
                     <input type="text" name="newheading" placeholder="Update task heading">
@@ -65,9 +65,6 @@
             </li>
         {% endfor %}
     </ul>
-    
-    
-    
 
     <form action="/todo/add_task" method="post">
         <input type="text" name="heading" placeholder="Enter Task heading">

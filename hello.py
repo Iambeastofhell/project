@@ -105,7 +105,11 @@ def update_task(task_index):
         return redirect(url_for('todo'))
 translated=""
 
-
+@app.route('/todo/delete_task/<int:task_index>', methods=['GET', 'POST'])
+def delete_task(task_index):
+        del tasks[task_index]
+        return redirect(url_for('todo'))
+        
 def get_language_code(lang):
     for code, name in LANGUAGES.items():
         if name.lower() == lang.lower():
