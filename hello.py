@@ -1,8 +1,9 @@
 from flask import Flask,render_template,request,jsonify,redirect,url_for
 from datetime import datetime
 from googletrans import Translator,LANGUAGES
-import os
+import os,csv
 from PIL import Image,ImageFilter
+from random import sample
 tran=Translator()
 
 app = Flask(__name__)
@@ -57,61 +58,6 @@ def play_tic_tac_toe():
     return render_template('hello.html', board=board, current_player=current_player)
 
 
-# Sample card data
-cards = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H']
-
-# Global variables to keep track of the game state
-flipped_cards = []
-matched_pairs = 0
-posttime=0
-completedtime=0
-
-@app.route('/card')
-def card():
-    return render_template('index2.html')
-
-@app.route('/get_cards')
-def get_cards():
-    import random
-    random.shuffle(cards)
-    return jsonify(cards)
-
-@app.route('/flip_card', methods=['POST'])
-def flip_card():
-    global flipped_cards
-
-    # Get index of the flipped card from the request
-    card_index = int(request.json['card_index'])
-
-    # Ensure the card is not already flipped
-    if card_index not in flipped_cards:
-        flipped_cards.append(card_index)
-
-    return jsonify(flipped_cards)
-
-@app.route('/check_match', methods=['POST'])
-def check_match():
-    global flipped_cards, matched_pairs
-
-    # Get the indices of the flipped cards from the request
-    card_indices = request.json['card_indices']
-
-    # Check if the two flipped cards match
-    if len(card_indices) == 2:
-        card1 = cards[card_indices[0]]
-        card2 = cards[card_indices[1]]
-
-        if card1 == card2:
-            matched_pairs += 1
-            if matched_pairs == len(cards) / 2:
-                return jsonify({'status': 'win'})
-            else:
-                return jsonify({'status': 'match'})
-        else:
-            flipped_cards = []
-
-    return jsonify({'status': 'no_match'})
-
 tasks = []
 completed=[]
 datet=0
@@ -139,29 +85,24 @@ def complete_task(task_id):
         completed.append(tasks[task_id])
         del tasks[task_id]
     return redirect(url_for('todo'))
-updatedid=0
-@app.route('/todo/update_task/<int:task_id>')
-def update_task(task_id):
-    global updateid
-    updatedid=task_id
-    return redirect(url_for('update'))
 
-@app.route("/updatetodo",  methods=['GET', 'POST'])
-def update():
-    newhead=request.form.get('heading')
-    # newhead=newhead.text
-    ntext=request.form.get('note')
-    if newhead!="":
-        tasks[updatedid][2]=newhead
-    elif ntext!="":
-        tasks[updatedid][0]=ntext
-    else:
-        return redirect(url_for("/todo"))
-    dat=datetime.now().strftime("%c")
-    tasks[updatedid][1]=dat
-    return redirect(url_for("todo"))
-
-
+@app.route('/todo/update_task/<int:task_index>', methods=['GET', 'POST'])
+def update_task(task_index):
+    if request.method == 'GET':
+        task = tasks[task_index]
+        return render_template('todo.html', tasks=tasks, completed=completed, task_to_update=task)
+    elif request.method == 'POST':
+        updated_content = request.form.get('newcontent')
+        updated_heading = request.form.get('newheading')
+        if updated_content != "":  
+            tasks[task_index][0] = updated_content
+            dat=datetime.now().strftime("%c")
+            tasks[task_index][1]=dat
+        if updated_heading != "":  
+            tasks[task_index][2] = updated_heading
+            dat=datetime.now().strftime("%c")
+            tasks[task_index][1]=dat
+        return redirect(url_for('todo'))
 translated=""
 
 
@@ -185,8 +126,7 @@ def translate():
         return render_template("translate.html", text=t,detected=detected)
     else:
         return render_template("translate.html", text="No text translated yet")
-# if __name__ == '__main__':
-#     app.run(debug=False,host='0.0.0.0')
+
 @app.route("/tools/image/post", methods=['POST',"GET"])
 def image():
     img=request.files['image']
@@ -214,3 +154,17 @@ def img():
     name=""
     out=""
     return render_template("image.html",name=name,out=out)
+useranime=[]
+@app.route("/anime", methods=['GET','POST'])
+def anime():
+    global useranime
+    with open(r"static\asset\anime.csv","r",encoding='utf-8') as fh:
+        rd=csv.reader(fh)
+        next(rd,None)
+        # a=0
+        # while a<=2:
+        #     useranime.append(list(rd)[a])
+        #     a+=1
+        useranime=list(rd)
+    useranime=sample(useranime,k=10)
+    return render_template("anime.html",useranime=useranime)

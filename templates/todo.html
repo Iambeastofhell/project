@@ -50,16 +50,31 @@
 </head>
 <body>
     <h1>To-Do List</h1>
+
+    <h3>Incomplete Tasks</h3>
     <ul class="st">
         {% for task in tasks %}
-            <li><h3>{{ task[2] }} </h3> {{ task[0] }} <a href="/todo/complete_task/{{ loop.index0 }}">[Complete] </a>  <a href="/todo/update_task/{{ loop.index0 }}">[Update] </a>  {{task[1]}} </li>
+            <li>
+                <h3>{{ task[2] }}</h3>  {{ task[0] }}  <a href="/todo/complete_task/{{ loop.index0 }}">[Complete]</a>    {{ task[1] }}
+                <form method="POST" action="/todo/update_task/{{ loop.index0 }}" class="update-form hidden">
+                    <input type="hidden" name="task_index" value="{{ loop.index0 }}">
+                    <input type="text" name="newheading" placeholder="Update task heading">
+                    <input type="text" name="newcontent" placeholder="Update task content">
+                    <button type="submit">Update Task</button>
+                </form>
+            </li>
         {% endfor %}
     </ul>
+    
+    
+    
+
     <form action="/todo/add_task" method="post">
         <input type="text" name="heading" placeholder="Enter Task heading">
         <input type="text" name="content" placeholder="Enter task">
         <button type="submit">Add Task</button>
     </form>
+    <h3>Completed Tasks</h3>
     <ul class="st">
         {% for i in completed[::-1][:10] %}
             <li> <h3>{{ i[2]}} </h3>{{ i[0] }} (Completed) {{i[1]}}</li>

@@ -42,7 +42,9 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            /* background-image: url('templates\\bg.mp4'); */
             background-image: url('https://e0.pxfuel.com/wallpapers/3/311/desktop-wallpaper-starry-sky-awesome-starry-sky-beautiful-starry-night-sky.jpg');
+
             background-size: cover;
             background-position: center;
             margin-top: 0;
@@ -124,6 +126,19 @@
             padding: 2px;
             margin: 5px;
         }
+        .v{
+             background-image: url("static/asset/Img.jpg"); 
+            background-size: cover;
+            color: black;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease-in-out;
+        }
+        .v:hover{
+            filter: grayscale(0);
+        }
+        .i{
+            z-index: -4;
+}
     </style>
 </head>
 <body>
@@ -138,12 +153,16 @@
     </nav>
     <div class="main">
         <div class="type">Introduction to programming</div>
+        <video id="i" autoplay loop muted>
+            <source src="bg.mp4" type="video/mp4">
+        </video>
+        
     </div>
     <div class="madeby">
         <ul>
-            <li>Vishesh</li>
-            <li>Zeeshan</li>
-            <li>Aswin</li>
+            <li class="v"><h1>Vishesh</h1> 112301037</li>
+            <li><h1>Zeeshan</h1></li>
+            <li><h1>Aswin</h1></li>
         </ul>
     </div>
 </body>
