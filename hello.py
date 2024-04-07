@@ -15,9 +15,6 @@ def index():
 @app.route("/start")
 def start():
     return render_template("start.html")
-# @app.route('/hello')
-# def hello():
-#     return render_template("hello.html")
 
 board = [""] * 9
 current_player = "X"
@@ -145,7 +142,7 @@ def image():
 
         elif op=="blur":
             blur_img = Image.open(f"static/tools/image/{img.filename}")
-            blur_img = blur_img.filter(ImageFilter.BoxBlur(15))  
+            blur_img = blur_img.filter(ImageFilter.GaussianBlur(15))  
             blur_img.save(f"static/tools/image/blur_{img.filename}")
             return render_template("image.html" ,name=img.filename,out=f"blur_{img.filename}")
         elif op=="rotate":
@@ -158,9 +155,9 @@ def img():
     name=""
     out=""
     return render_template("image.html",name=name,out=out)
-useranime=[]
+useranime=[]  
 @app.route("/anime", methods=['GET','POST'])
-def anime():
+def anime(): 
     global useranime
     with open(r"static\asset\anime.csv","r",encoding='utf-8') as fh:
         rd=csv.reader(fh)

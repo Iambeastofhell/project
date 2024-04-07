@@ -127,18 +127,17 @@
             margin: 5px;
         }
         .v{
-             background-image: url("static/asset/Img.jpg"); 
+            background-image: url("static/asset/Img.jpg"); 
             background-size: cover;
             color: black;
             filter: grayscale(100%);
             transition: filter 0.5s ease-in-out;
         }
-        .v:hover{
-            filter: grayscale(0);
+        .v:hover, v:active{
+            filter: none;
+            transform: rotateY(360deg) scale(1.2);
+            transition: transform 1s ease-in-out;
         }
-        .i{
-            z-index: -4;
-}
     </style>
 </head>
 <body>
@@ -153,10 +152,6 @@
     </nav>
     <div class="main">
         <div class="type">Introduction to programming</div>
-        <video id="i" autoplay loop muted>
-            <source src="bg.mp4" type="video/mp4">
-        </video>
-        
     </div>
     <div class="madeby">
         <ul>
@@ -165,5 +160,15 @@
             <li><h1>Aswin</h1></li>
         </ul>
     </div>
+    <script>
+        function tabBlur() {
+            document.title = "Leaving? 😭";
+        }
+        function tabFocus() {
+            document.title = "Introduction to programming";  
+        }
+        window.onblur = tabBlur;
+        window.onfocus = tabFocus;
+    </script>
 </body>
 </html>

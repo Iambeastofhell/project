@@ -5,15 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
     <style>
+        /* *{ */
+            /* background-color: black; */
+            /* color: white; */
+        /* } */
+        body{
+            background-image: url(/static/asset/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg);
+            background-size: contain;
+            /* display: grid;
+            grid-template-areas: "head head head head head"
+            "intask intask intask intask intask"
+            "empty heading task submit empty"
+            "com com com com com"
+            "at at at at at"
+            "ct ct ct ct ct"; */
+            /* background-color: red; */
+        }
         .invi{
             opacity: 0;
         }
-        .big:hover{
+        .big:hover, .big:active{
             .invi1{
                 opacity: 1;
             }
         }
-        .com:hover{
+        .com:hover, .com:active{
             .invi2{
                 opacity: 1;
             }
@@ -30,32 +46,58 @@
         .big{
             height: 50vh;
             width: 40vw;
-            position: fixed;
+            /* position: fixed;
             top: 0;
-            right: 0;
+            right: 0; */
             overflow: scroll;
         }
         .com{
             overflow: scroll;
             height: 50vh;
             width: 40vw;
-            position: fixed;
+            /* position: fixed;
             bottom: 0;
-            right: 0;
+            right: 0; */
         }
         .st{
             list-style-type: decimal;
         }
+        .head{
+            grid-area: head;
+            text-align: center;
+        }
+        .it{
+            grid-area: intask;
+            text-align: center;
+        }
+        .a::before{
+            content: "➡️";
+        }
+        .l{
+            border: 2px solid white;
+            padding: 3px;
+            margin: 3px;
+            
+        }
+        .links{
+            padding: 5px;   
+            height: 20px;
+        }
+        .display{
+            display: flex;
+        }
     </style>
 </head>
 <body>
-    <h1>To-Do List</h1>
+    <h1 class="head" >To-Do List</h1>
 
-    <h3>Incomplete Tasks</h3>
+    <h3 class="it">Incomplete Tasks</h3>
     <ul class="st">
         {% for task in tasks %}
-            <li>
-                <h3>{{ task[2] }}</h3>  {{ task[0] }}  <a href="/todo/complete_task/{{ loop.index0 }}"> Complete </a> <a href="/todo/delete_task/{{ loop.index0 }}"> Delete </a>    {{ task[1] }}
+            <li class="it">
+                <h3 class="a">{{ task[2] }}</h3>  {{ task[0] }} <br>  <div class="links">  <a class="l" href="/todo/complete_task/{{ loop.index0 }}">Complete</a>
+    <a class="l" href="/todo/delete_task/{{ loop.index0 }}">Delete</a>
+  </div>   {{ task[1] }}
                 <form method="POST" action="/todo/update_task/{{ loop.index0 }}" class="update-form hidden">
                     <input type="hidden" name="task_index" value="{{ loop.index0 }}">
                     <input type="text" name="newheading" placeholder="Update task heading">
@@ -77,22 +119,25 @@
             <li> <h3>{{ i[2]}} </h3>{{ i[0] }} (Completed) {{i[1]}}</li>
         {% endfor %}
     </ul>
-    <div class="stick">
-        <div class="big">
-            <button class="task">All Tasks</button>
-            <ul class="st invi invi1">
-                {% for i in tasks %}
+    <div class="display">
+
+        <div class="stick">
+            <div class="big">
+                <button class="task">All Tasks</button>
+                <ul class="st invi invi1">
+                    {% for i in tasks %}
                     <<li> <h3>{{ i[2]}} </h3>{{ i[0] }} {{i[1]}}</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="com">
-            <button class="comp">All Completed Tasks</button>
-            <ul class="st invi invi2">
-                {% for i in completed %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="com">
+                <button class="comp">All Completed Tasks</button>
+                <ul class="st invi invi2">
+                    {% for i in completed %}
                     <li> <h3>{{ i[2]}} </h3>{{ i[0] }}  {{i[1]}}</li>
-                {% endfor %}
-            </ul>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </body>
