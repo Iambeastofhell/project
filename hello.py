@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,jsonify,redirect,url_for
+from flask import Flask,render_template,request,redirect,url_for
 from datetime import datetime
 from googletrans import Translator,LANGUAGES
 import os,csv

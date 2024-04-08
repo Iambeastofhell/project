@@ -10,8 +10,8 @@
             /* color: white; */
         /* } */
         body{
-            background-image: url(/static/asset/glenn-carstens-peters-RLw-UC03Gwc-unsplash.jpg);
-            background-size: contain;
+            background-image: url(/static/asset/todo.jpeg);
+            background-size: cover;
             /* display: grid;
             grid-template-areas: "head head head head head"
             "intask intask intask intask intask"
@@ -65,6 +65,9 @@
         .head{
             grid-area: head;
             text-align: center;
+            color: red;
+            font-weight: bolder;
+            font-size: 50px;
         }
         .it{
             grid-area: intask;
@@ -86,16 +89,39 @@
         .display{
             display: flex;
         }
+        .todo-form {
+            background-color: #e0f7ff;
+            border: 1px solid #cccccc;
+            border-radius: 5px; 
+            padding: 20px;
+            margin: 0 auto;
+            width: 50%; 
+        }
+
+        .todo-form input[type="text"] {
+            display: block; 
+            width: 100%; 
+            padding: 10px;
+            border: 1px solid #cccccc; 
+            border-radius: 3px; 
+            margin-bottom: 15px; 
+        }
+        .todo-form button {
+            background-color: #3399ff;
+            color: white; 
+            border-radius: 10%;
+            cursor: pointer; 
+        }
     </style>
 </head>
 <body>
-    <h1 class="head" >To-Do List</h1>
+    <h1 class="head">To-Do List</h1>
 
     <h3 class="it">Incomplete Tasks</h3>
     <ul class="st">
         {% for task in tasks %}
             <li class="it">
-                <h3 class="a">{{ task[2] }}</h3>  {{ task[0] }} <br>  <div class="links">  <a class="l" href="/todo/complete_task/{{ loop.index0 }}">Complete</a>
+                <h2 class="a">{{ task[2] }}</h2>  <h3>{{ task[0] }} </h3><br>  <div class="links">  <a class="l" href="/todo/complete_task/{{ loop.index0 }}">Complete</a>
     <a class="l" href="/todo/delete_task/{{ loop.index0 }}">Delete</a>
   </div>   {{ task[1] }}
                 <form method="POST" action="/todo/update_task/{{ loop.index0 }}" class="update-form hidden">
@@ -108,7 +134,7 @@
         {% endfor %}
     </ul>
 
-    <form action="/todo/add_task" method="post">
+    <form action="/todo/add_task" method="post" class="todo-form">
         <input type="text" name="heading" placeholder="Enter Task heading">
         <input type="text" name="content" placeholder="Enter task">
         <button type="submit">Add Task</button>

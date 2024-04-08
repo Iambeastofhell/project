@@ -15,13 +15,16 @@
         }
         .type{
             overflow: hidden;
+            color: #000080;
             border-right: 2px solid black;
             white-space: nowrap;
             letter-spacing: 0.1em; 
             margin: 0 auto;
+            font-weight: bolder;
             animation: typing 3s steps(40, end) forwards, blink .75s step-end infinite;
             font-size: 50px;
-            text-shadow: #7AF8FF 0px -3px 6px,  #7AF8FF 0px 2px 3px;
+            text-shadow: 1px 1px 1px #ddd, -1px -1px 4px #d2f0fc
+            /* text-shadow: #7AF8FF 0px -3px 6px,  #7AF8FF 0px 2px 3px; */
 ;
         }
         @keyframes typing {
@@ -29,7 +32,7 @@
                 width: 0%;
             }
             to{
-                width: 55%;
+                width: 60%;
             }
         }
         @keyframes blink {
@@ -37,28 +40,31 @@
             50% { border-color: orange; }
         }
         .main{
-            height: 100vh;
+            height: 150vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             /* background-image: url('templates\\bg.mp4'); */
-            background-image: url('https://e0.pxfuel.com/wallpapers/3/311/desktop-wallpaper-starry-sky-awesome-starry-sky-beautiful-starry-night-sky.jpg');
-
+            background-image: url('/static/asset/bg.jpeg');
+            background-attachment: fixed;
             background-size: cover;
-            background-position: center;
+            /* background-position: center; */
             margin-top: 0;
             overflow: hidden;
+            background-position: 0px -150px;
         }
         .menu{
             margin: 15px;
             border-radius: 20%;
             padding: 10px;
-            box-shadow:  #7AF8FF 0px -8px 30px,  #7AF8FF 0px 4px 6px;
+            /* box-shadow:  #7AF8FF 0px -8px 30px,  #7AF8FF 0px 4px 6px; */
             cursor: pointer;
             text-align: center;
             height: 50%;
             z-index: 101;
+            color: white;
+            background-color: #008080;
         }
         .menu:hover + ul li{
             opacity: 1;
@@ -68,15 +74,26 @@
             opacity: 1;
             /* transform: translate(-50%, -50%); */
         }
+        .menu:hover{
+            animation: wiggle 0.3s ease infinite;
+
+        }
         .nav{
             position: sticky;
             top: 0;
+            width: 100%;
+            height: auto;
             z-index: 100;
             display: flex;
             justify-content: space-between;
-            background-image: url('https://e0.pxfuel.com/wallpapers/3/311/desktop-wallpaper-starry-sky-awesome-starry-sky-beautiful-starry-night-sky.jpg');
-            background-size: cover;
-            background-position: top;            
+            /* background-image: url('/static/asset/bg.jpeg'); */
+            /* background-clip: content-box; */
+            /* background-size: cover; */
+            /* background-color:transparent; */
+            /* background-color: rgb(240, 203, 209); */
+            /* background-color: #008080; */
+            /* background-color: rgba(0, 0, 255, 0.5); */
+            /* background-position: top;             */
         }
         .nav ul{
             list-style-type: none;
@@ -87,16 +104,18 @@
             margin: 15px;
             border-radius: 20%;
             padding: 10px;
-            box-shadow:  #7AF8FF 0px -8px 30px,  #7AF8FF 0px 4px 6px;
+            /* box-shadow:  #7AF8FF 0px -8px 30px,  #7AF8FF 0px 4px 6px; */
             transition: 1s;
+            color: #333333;
+            background-color: #008080;
             opacity: 0;
 
         }
         .nav ul li:hover{
             /* box-shadow: 0 0 30px blue; */
             /* box-shadow:  #7AF8FF 0px -12px 30px inset,  #7AF8FF 0px 4px 6px inset; */
-            animation: rotate 2s infinite;
-            background-color: #7AF8FF;
+            animation: wiggle 0.3s ease infinite;
+            /* background-color: #7AF8FF; */
             box-shadow: none;
             transition: 1s;
         }
@@ -104,9 +123,9 @@
             color: black;
             transition: 1s;
         }
-        @keyframes rotate {
-            from{rotate: 0deg;}
-            to{rotate: 360deg;}
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            0% { transform: rotate(5deg); }
         }
         a{
             text-decoration: none;
@@ -122,18 +141,26 @@
             height: 60vh;
             width: 27vw;
             border-radius: 20px;
-            box-shadow:  #7AF8FF 0px -8px 30px,  #7AF8FF 0px 4px 6px;
+            /* box-shadow:  #7AF8FF 0px -8px 30px,  #7AF8FF 0px 4px 6px; */
             padding: 2px;
             margin: 5px;
         }
         .v{
             background-image: url("static/asset/Img.jpg"); 
+        }
+        .z{
+            background-image: url(/static/asset/z.jpg);
+        }
+        .as{
+            background-image: url(/static/asset/a.jpg);
+        }
+        .v, .z,.as{
             background-size: cover;
             color: black;
             filter: grayscale(100%);
             transition: filter 0.5s ease-in-out;
         }
-        .v:hover, v:active{
+        .v:hover, v:active, .z:hover, z:active,.as:hover, as:active {
             filter: none;
             transform: rotateY(360deg) scale(1.2);
             transition: transform 1s ease-in-out;
@@ -153,11 +180,12 @@
     <div class="main">
         <div class="type">Introduction to programming</div>
     </div>
+    <center><h2>Made By:-</h2></center>
     <div class="madeby">
         <ul>
             <li class="v"><h1>Vishesh</h1> 112301037</li>
-            <li><h1>Zeeshan</h1></li>
-            <li><h1>Aswin</h1></li>
+            <li class="z"><h1>Zeeshan</h1></li>
+            <li class="as"><h1>Aswin</h1></li>
         </ul>
     </div>
     <script>
