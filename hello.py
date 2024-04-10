@@ -156,16 +156,26 @@ def img():
     out=""
     return render_template("image.html",name=name,out=out)
 useranime=[]  
+search=""
 @app.route("/anime", methods=['GET','POST'])
 def anime(): 
-    global useranime
+    global useranime,search
+    if request.method=="POST":
+        search=request.form["search"]
+    else:
+        search=""
     with open(r"static\asset\anime.csv","r",encoding='utf-8') as fh:
         rd=csv.reader(fh)
         next(rd,None)
+        ans=""
+        useranime=list(rd)
+        if search !="":
+            for i in useranime:
+                if i[1].lower()==search.lower():
+                    ans=i
         # a=0
         # while a<=2:
         #     useranime.append(list(rd)[a])
         #     a+=1
-        useranime=list(rd)
     useranime=sample(useranime,k=10)
-    return render_template("anime.html",useranime=useranime)
+    return render_template("anime.html",useranime=useranime,ans=ans)

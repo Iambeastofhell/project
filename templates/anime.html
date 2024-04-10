@@ -13,7 +13,16 @@
     </form>
     {% for i in range(5) %} 
      {{ useranime[i] }} <br> {% endfor %}
-
+     {% if ans %}
+     <h2>Search results</h2>
+     <h3>Name: {{ans[1]}}</h3>
+    <h3>Genre:  {{ans[2]}}</h3>
+    <h3>Type: {{ans[3]}}</h3>
+    <h3>Episodes: {{ans[5]}}</h3>
+    <h3>Rating: {{ans[6]}}</h3>
+    <h3>More info: <a href="https://myanimelist.net/anime/{{ans[0]}}" target="_blank">More info on myanimelist</a> </h3>
+    <h3>Watch online: <a href="https://www.crunchyroll.com/search?q={{ans[1]}}" target="_blank">Watch online on crunchyroll</a> </h3>
+    {% endif %}
 
 </body>
 </html>
