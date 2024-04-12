@@ -23,9 +23,7 @@
             font-weight: bolder;
             animation: typing 3s steps(40, end) forwards, blink .75s step-end infinite;
             font-size: 50px;
-            text-shadow: 1px 1px 1px #ddd, -1px -1px 4px #d2f0fc
-            /* text-shadow: #7AF8FF 0px -3px 6px,  #7AF8FF 0px 2px 3px; */
-;
+            text-shadow: 1px 1px 1px #ddd, -1px -1px 4px #d2f0fc;
         }
         @keyframes typing {
             from{
@@ -40,43 +38,16 @@
             50% { border-color: orange; }
         }
         .main{
-            height: 150vh;
+            height: 130vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            /* background-image: url('templates\\bg.mp4'); */
             background-image: url('/static/asset/bg.jpeg');
             background-attachment: fixed;
             background-size: cover;
-            /* background-position: center; */
-            margin-top: 0;
+            position: relative;
             overflow: hidden;
             background-position: 0px -150px;
-        }
-        .menu{
-            margin: 15px;
-            border-radius: 20%;
-            padding: 10px;
-            /* box-shadow:  #7AF8FF 0px -8px 30px,  #7AF8FF 0px 4px 6px; */
-            cursor: pointer;
-            text-align: center;
-            height: 50%;
-            z-index: 101;
-            color: white;
-            background-color: #008080;
-        }
-        .menu:hover + ul li{
-            opacity: 1;
-            /* transform: translate(-50%, -50%); */
-        }
-        .menu:focus + ul li{
-            opacity: 1;
-            /* transform: translate(-50%, -50%); */
-        }
-        .menu:hover{
-            animation: wiggle 0.3s ease infinite;
-
         }
         .nav{
             position: sticky;
@@ -85,15 +56,7 @@
             height: auto;
             z-index: 100;
             display: flex;
-            justify-content: space-between;
-            /* background-image: url('/static/asset/bg.jpeg'); */
-            /* background-clip: content-box; */
-            /* background-size: cover; */
-            /* background-color:transparent; */
-            /* background-color: rgb(240, 203, 209); */
-            /* background-color: #008080; */
-            /* background-color: rgba(0, 0, 255, 0.5); */
-            /* background-position: top;             */
+            justify-content: center;
         }
         .nav ul{
             list-style-type: none;
@@ -104,19 +67,13 @@
             margin: 15px;
             border-radius: 20%;
             padding: 10px;
-            /* box-shadow:  #7AF8FF 0px -8px 30px,  #7AF8FF 0px 4px 6px; */
             transition: 1s;
             color: #333333;
             background-color: #008080;
-            opacity: 0;
 
         }
         .nav ul li:hover{
-            /* box-shadow: 0 0 30px blue; */
-            /* box-shadow:  #7AF8FF 0px -12px 30px inset,  #7AF8FF 0px 4px 6px inset; */
-            animation: wiggle 0.3s ease infinite;
-            /* background-color: #7AF8FF; */
-            box-shadow: none;
+            animation: wiggle 0.3s ease ;
             transition: 1s;
         }
         a:hover{
@@ -124,52 +81,68 @@
             transition: 1s;
         }
         @keyframes wiggle {
-            0%, 100% { transform: rotate(-5deg); }
-            0% { transform: rotate(5deg); }
+            0%, 100% { transform: rotate(-10deg); }
+            0% { transform: rotate(10deg); }
         }
         a{
             text-decoration: none;
             color: white;
             font-size: large;
         }
-        .madeby ul{
-            list-style: none;
-            display: flex;
-            gap: 10px;
-        }
-        .madeby ul li{
-            height: 60vh;
-            width: 27vw;
-            border-radius: 20px;
-            /* box-shadow:  #7AF8FF 0px -8px 30px,  #7AF8FF 0px 4px 6px; */
-            padding: 2px;
-            margin: 5px;
-        }
-        .v{
-            background-image: url("static/asset/Img.jpg"); 
-        }
-        .z{
-            background-image: url(/static/asset/z.jpg);
-        }
-        .as{
-            background-image: url(/static/asset/a.jpg);
-        }
-        .v, .z,.as{
+        .madeby{
+                display: flex;
+                justify-content: center; 
+                margin: 20px 0; 
+            }
+            .rest{
             background-size: cover;
-            color: black;
-            filter: grayscale(100%);
-            transition: filter 0.5s ease-in-out;
+                background-image: url("https://images.pexels.com/photos/531767/pexels-photo-531767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+            }
+            .madeitem{
+            position: relative;
+            overflow: hidden; 
+            perspective: 1000px; 
+            width: 300px; 
+            height: 350px;
+            transform: rotateY(-15deg) rotateZ(-15deg);
+            transition: transform 0.3s ease-in-out;
         }
-        .v:hover, v:active, .z:hover, z:active,.as:hover, as:active {
-            filter: none;
-            transform: rotateY(360deg) scale(1.2);
-            transition: transform 1s ease-in-out;
+        .madeitem img{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .madeitem h2{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .madeitem:hover{
+            transform: rotateY(0deg) rotateX(0deg); 
+        }
+        .madeitem:hover img, .madeitem:hover h2{
+            opacity: 1;
+        }
+        .cloud{
+            width: 100%;
+            height: 250px;
+            position: relative;
+            top: -60px;
         }
     </style>
 </head>
 <body>
     <nav class="nav">
-        <div class="menu" tabindex="0">Menu</div>
         <ul>
             <li><a href="todo">todo</a></li>
             <li><a href="translate">translate</a></li>
@@ -180,15 +153,20 @@
     <div class="main">
         <div class="type">Introduction to programming</div>
     </div>
-    <center><h2>Made By:-</h2></center>
-    <div class="madeby">
-        <ul>
-            <li class="v"><h1>Vishesh</h1> 112301037</li>
-            <li class="z"><h1>Zeeshan</h1></li>
-            <li class="as"><h1>Aswin</h1></li>
-        </ul>
+    <div class="rest">
+
+        <img class="cloud" src="/static/asset/cloud.png" alt="">
+        <center><h1 style="color: black;">Made By:-</h1></center>
+        <br><br><br><br>
+        <div class="madeby">
+            <div class="madeitem"><img src="/static/asset/Img.jpg" alt=""><h2>Vishesh</h2></div>
+            <div class="madeitem"><img src="/static/asset/a.jpg" alt=""><h2>Aswin</h2></div>
+            <div class="madeitem"><img src="/static/asset/z.jpg" alt=""><h2>Zeeshan</h2></div>
+        </div>
+        <br><br><br><br>
+
     </div>
-    <script>
+        <script>
         function tabBlur() {
             document.title = "Leaving? 😭";
         }

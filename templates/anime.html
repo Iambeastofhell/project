@@ -18,11 +18,18 @@
      <h3>Name: {{ans[1]}}</h3>
     <h3>Genre:  {{ans[2]}}</h3>
     <h3>Type: {{ans[3]}}</h3>
-    <h3>Episodes: {{ans[5]}}</h3>
-    <h3>Rating: {{ans[6]}}</h3>
+    <h3>Episodes: {{ans[4]}}</h3>
+    <h3>Rating: {{ans[5]}}</h3>
     <h3>More info: <a href="https://myanimelist.net/anime/{{ans[0]}}" target="_blank">More info on myanimelist</a> </h3>
     <h3>Watch online: <a href="https://www.crunchyroll.com/search?q={{ans[1]}}" target="_blank">Watch online on crunchyroll</a> </h3>
+    {% if imo %}
+    <h3>Watch online for free: <a href="https://animesuge.to/filter?keyword={{ans[1]}}" target="_blank">Animesuge</a> </h3>
     {% endif %}
-
+    {% endif %}
+    <h2>recommendation based on your tastes</h2>
+    {% if recomend %}
+    {% for i in range(5) %} 
+     {{ recomlst[i] }} <br> {% endfor %}
+    {% endif %}
 </body>
 </html>
