@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minesweeper</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+    .cell {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 20px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  {% if game_over %}
+    {% if win %}
+      <h1>You Win!</h1>
+      <a href="{{ url_for('play_again') }}">Play Again</a>
+      {% else %}
+      <h2>Game Over!</h2>
+      <a href="{{ url_for('play_again') }}">Play Again</a>
+    {% endif %}
+  {% endif %}
+  <table>
+    {% for row in range(8) %}
+      <tr>
+        {% for col in range(8) %}
+          <td class="cell" onclick="handleClick({{ row }}, {{ col }})">{{ board[row][col] }}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </table>
+  <script>
+    function handleClick(row, col) {
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = "/";
+      const rowField = document.createElement("input");
+      rowField.type = "hidden";
+      rowField.name = "row";
+      rowField.value = row;
+      const colField = document.createElement("input");
+      colField.type = "hidden";
+      colField.name = "col";
+      colField.value = col;
+      form.appendChild(rowField);
+      form.appendChild(colField);
+      document.body.appendChild(form);
+      form.submit();
+    }
+  </script>
+</body>
+</html>
