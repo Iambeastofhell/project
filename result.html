@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if game_over %}
+    {% if win %}
+      <h2>You Win!</h2>
+      <a href="/">Play again</a>
+    {% else %}
+      <h2>Game Over!</h2>
+    {% endif %}
+  {% endif %}
+</body>
+</html>
