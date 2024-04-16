@@ -17,6 +17,7 @@ const { json } = require('body-parser');
 
 app.use(express.urlencoded({ extended: true }));
 
+const nodemailer = require('nodemailer');
 const port = 8100;
 
 var data = {}
@@ -101,12 +102,40 @@ app.post('/home',async (req, res) => {
 
 
         
-        data = {
-            'name':req.body.name
-        }
-        res.sendFile(homeHtml)
+        let mailTransporter =
+            nodemailer.createTransport(
+                {
+                    service: 'gmail',
+                    auth: {
+                        user: 'thatawesomeproject@gmail.com',
+                        pass: 'vdno ohkm pkkv wjac'
+                    }
+                }
+            );
         
-})
+        let mailDetails = {
+            from: 'thatawesomeproject@gmail.com',
+            to: req.body.email,
+            subject: 'Login mail',
+            text: 'You successfully login to the web page, Now you can use the ChatBot'
+        };
+ 
+        mailTransporter
+            .sendMail(mailDetails,
+                function (err, data) {
+                    if (err) {
+                        console.log('Error Occurs',err);
+                    } else {
+                        console.log('Email sent successfully');
+                    }
+                });
+
+                data = {
+                    'name':req.body.name
+                }
+                res.sendFile(homeHtml)
+                
+        })
 
 // app.get('/',(req,res)=>{
 //     const chatBot_index = path.join(__dirname,'chatBot_index.html')
