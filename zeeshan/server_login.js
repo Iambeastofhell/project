@@ -137,10 +137,6 @@ app.post('/home',async (req, res) => {
                 
         })
 
-// app.get('/',(req,res)=>{
-//     const chatBot_index = path.join(__dirname,'chatBot_index.html')
-//     res.sendFile(chatBot_index)
-// })
 
 app.get('/getUserDetail',(req,res)=>{
     res.send(JSON.stringify(data))
