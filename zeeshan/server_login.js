@@ -106,13 +106,13 @@ app.post('/home',async (req, res) => {
 
         //This will check whether the student belong to the IIT PKD community or not 
         else if(!existingUser || !checkEmail(req.body.email)){
-            res.send('You Do Not Belong to the IIT PKD community')
+            return res.send('You Do Not Belong to the IIT PKD community')
         }
         //This is the addition of the current user into the list of the active user list 
         collection.updateOne({active_user:'active_user'},{$push:{current_user_list:{$each:[obj.name]}}})
 
 
-        let result =await collection.insertOne(obj);
+        let result =await collection.insertOne(obj) ;
         let user_collection = db.collection(req.body.handle_name);
         let insert = user_collection.insertOne({'name':req.body.name});
         console.log('User added to the database ');
