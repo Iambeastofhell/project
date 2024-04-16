@@ -46,6 +46,14 @@ async function verifyPassword(safe,hashedPasswordWithSalt){
     const match = await bcrypt.compare(safe,hashedPasswordWithSalt);
     return match;
 }
+
+//This function will check whether the email is from the college or not 
+function checkEmail(email){
+    if(email.includes('@smail.iitpkd.ac.in')){
+        return true
+    }
+    return false
+}
 var obj = {
     
 }
@@ -54,6 +62,7 @@ var collection = db.collection('users');
 collection.insertOne({active_user:'active_user'})
 app.post('/home',async (req, res) => {
    
+
         //Hashing of the password by calling the hashpassword funciotn 
         var hashed_password = await hashpassword(req.body.password);
         console.log(hashed_password);
@@ -77,7 +86,7 @@ app.post('/home',async (req, res) => {
         const homeHtml = path.join(__dirname, 'chatBot_index.html');
 
 
-        if (existingUser) {
+        if (existingUser ) {
             const password = await verifyPassword(req.body.password,existingUser.password);
             console.log('User with email already exists:', req.body.email);
 
@@ -87,11 +96,18 @@ app.post('/home',async (req, res) => {
                 const indexHtml = path.join(__dirname, 'index.html');
                 return res.send('Hello');
             }
+            // else if(!password && !checkEmail(req.body.email)){
+            //     return res.send('You are not in the IIT PKD community ')
+            // }
             else{
-                return res.send('Wrong password entered retry again');
+                return res.send('Wrong password Or You do not belong to the community');
             }
         }
 
+        //This will check whether the student belong to the IIT PKD community or not 
+        else if(!existingUser || !checkEmail(req.body.email)){
+            res.send('You Do Not Belong to the IIT PKD community')
+        }
         //This is the addition of the current user into the list of the active user list 
         collection.updateOne({active_user:'active_user'},{$push:{current_user_list:{$each:[obj.name]}}})
 
