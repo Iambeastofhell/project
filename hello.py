@@ -154,19 +154,22 @@ def img():
 useranime=[]  
 search=""
 imo=False
-userlist=["Romance","Action","Action"]
+lst=""
+userlist=["Romance"]
 @app.route("/anime", methods=['GET','POST'])
 def anime(): 
-    global useranime,search,userlist,imo
+    global useranime,search,userlist,imo,lst
     if request.method=="POST":
         search=request.form["search"]
-        lst=request.form["list"]
+        lst=request.form["anime"]
     else:
         search=""
     if search=="imo":
         imo=True
     elif search=="imof":
         imo=False
+    if lst!="":
+       userlist.extend([i.rstrip(",") for i in lst.split()])
     with open(r"static\asset\anime.csv","r",encoding='utf-8') as fh:
         rd=csv.reader(fh)
         next(rd,None)
@@ -187,7 +190,9 @@ def anime():
         # while a<=2:
         #     useranime.append(list(rd)[a])
         #     a+=1
-    recomlst=sample(recomlst,k=5)
+    print(userlist)
+    print(recomlst)
+    recomlst=sample(recomlst,k=min(len(recomlst),5))
     useranime=sample(useranime,k=10)
     return render_template("anime.html",useranime=useranime,ans=ans,recomend=recomend,recomlst=recomlst,imo=imo)
 

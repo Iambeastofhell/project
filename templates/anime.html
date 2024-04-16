@@ -25,10 +25,11 @@
 <video src="/static/asset/vid.mp4" autoplay muted loop></video>    
 <form action="\anime" method="post">
         <label for="search">Search by name</label>
-        <input type="search" name="search" id="search">
+        <input type="search" name="search" id="search"> <br>
+        {% for i in range(5) %} 
+        {{ useranime[i] }} <br>
+        <button type="submit" name="anime" value="{{ useranime[i][2] }} id="anime{{ i }}"">Add to List</button> <br> {% endfor %}
     </form>
-    {% for i in range(5) %} 
-     {{ useranime[i] }} <br> {% endfor %}
      {% if ans %}
      <h2>Search results</h2>
      <h3>Name: {{ans[1]}}</h3>
