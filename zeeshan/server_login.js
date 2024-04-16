@@ -54,6 +54,7 @@ function checkEmail(email){
     }
     return false
 }
+console.log(checkEmail('12@smail.iitpkd.ac.in')+'*******************')
 var obj = {
     
 }
@@ -105,7 +106,8 @@ app.post('/home',async (req, res) => {
         }
 
         //This will check whether the student belong to the IIT PKD community or not 
-        else if(!existingUser || !checkEmail(req.body.email)){
+        else if( (checkEmail(req.body.email) == false)){
+            console.log(req.body.email)
             return res.send('You Do Not Belong to the IIT PKD community')
         }
         //This is the addition of the current user into the list of the active user list 
