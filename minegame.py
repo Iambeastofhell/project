@@ -27,8 +27,8 @@ def count_adjacent_mines(board, row, col):
         count += 1
   return count
 
-@app.route("/", methods=["GET", "POST"])
-def index():
+@app.route("/mine", methods=["GET", "POST"])
+def mine():
   global board,display_board,num_mines
   if request.method == "GET":
     game_over = False  # Initialising the  game state
@@ -65,4 +65,4 @@ def play_again():
   board = [["" for _ in range(COLS)] for _ in range(ROWS)]  # Hidden board with mines
   display_board = [['' for _ in range(COLS)] for _ in range(ROWS)]  # Board to display
   num_mines = 0 # Reset game state and redirect to main page
-  return redirect(url_for("index")) 
+  return redirect(url_for("mine")) 
