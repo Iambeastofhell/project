@@ -186,13 +186,11 @@ def anime():
         for i in useranime:
             if genre in i[2]:
                 recomlst.append(i)
-        # a=0
-        # while a<=2:
-        #     useranime.append(list(rd)[a])
-        #     a+=1
-    print(userlist)
-    print(recomlst)
-    recomlst=sample(recomlst,k=min(len(recomlst),5))
+
+    if recomlst!=[]:
+        recomlst=sample(recomlst,k=min(len(recomlst),5))
+    else:
+       recomlst=sample(useranime,k=5)
     useranime=sample(useranime,k=10)
     return render_template("anime.html",useranime=useranime,ans=ans,recomend=recomend,recomlst=recomlst,imo=imo)
 
