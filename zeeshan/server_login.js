@@ -16,6 +16,7 @@ const {Server } = require('socket.io');
 const { json } = require('body-parser');
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'))
 
 const nodemailer = require('nodemailer');
 const port = 8100;
@@ -147,6 +148,10 @@ app.get('/chatBot_client.js',(req,res)=>{
     res.sendFile(client)
 })
 
+app.get('/home/chatBot_index.css',(req,res)=>{
+    const cssFile = path.join(__dirname,'chatBot_client.css')
+    res.sendFile(cssFile)
+})
 const server = app.listen(port,()=>{
     console.log('Server is running on the port no '+port)
 })
