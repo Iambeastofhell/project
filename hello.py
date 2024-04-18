@@ -186,7 +186,7 @@ def anime():
         for i in useranime:
             if genre in i[2]:
                 recomlst.append(i)
-
+    print()
     if recomlst!=[]:
         recomlst=sample(recomlst,k=min(len(recomlst),5))
     else:
