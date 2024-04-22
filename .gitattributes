@@ -1,2 +1,1 @@
-zeeshan/* linguist-vendored=false
-zeeshan/* linguist-documentation=false
+zeeshan/**/*.js linguist-vendored=true
