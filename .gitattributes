@@ -1,1 +1,5 @@
 /**/*.js linguist-vendored=true
+zeeshan/chatBot_client.js linguist-vendored=true 
+zeeshan/game_page.js linguist-vendored=true
+zeeshan/index.js linguist-vendored=true
+zeeshan/server_login.js linguist-vendored=true
