@@ -62,17 +62,20 @@
             border-radius: 30px;
             backdrop-filter: blur(15px);
             justify-content: center;
+		box-shadow: 0 0 10px 5px rgba(0, 191, 255, 0.5);
+            
         }
         .nvb{
-            color: #333333;
+            color: #f0e6e6;
             /* background-color: #008080; */
             cursor: pointer;
+            font-family: "Comic Sans MS", cursive, sans-serif;
             transition: scale 0.25s ease-in, opacity 0.25s ease-in, filter 0.25s ease-in;
             padding: 5px;
             margin: 5px;
-            font-size: 25px;
+            font-size: 22px;
             border-radius: 20%;
-
+            
             &:hover{
                 scale: 1.2;
             }
@@ -82,10 +85,7 @@
             opacity: 0.8;
             filter: blur(5px);
         }
-        a:hover{
-            color: black;
-            transition: 1s;
-        }
+        
         a{
             text-decoration: none;
             color: white;
@@ -243,22 +243,150 @@
     display: flex;
     justify-content: space-evenly;
 }
+/* body {
+	background: #111;
+	height: 100vh;
+} */
+.wrapper span {
+	position: fixed;
+	bottom: -180px;
+	height: 50px;
+	width: 50px;
+	z-index: -1;
+	background-color: #18191f;
+	box-shadow: 0 0 50px #0072ff, 0 0 100px #0072ff, 0 0 150px #0072ff, 0 0 200px #0072ff;
+	animation: animate 10s linear infinite;
+}
+.wrapper span:nth-child(1) {
+	left: 60px;
+	animation-delay: 0.6s;
+}
+.wrapper span:nth-child(2) {
+	left: 10%;
+	animation-delay: 3s;
+	width: 60px;
+	height: 60px;
+}
+.wrapper span:nth-child(3) {
+	left: 20%;
+	animation-delay: 2s;
+}
+.wrapper span:nth-child(4) {
+	left: 30%;
+	animation-delay: 5s;
+	width: 80px;
+	height: 80px;
+}
+.wrapper span:nth-child(5) {
+	left: 40%;
+	animation-delay: 1s;
+}
+.wrapper span:nth-child(6) {
+	left: 50%;
+	animation-delay: 7s;
+}
+.wrapper span:nth-child(7) {
+	left: 60%;
+	animation-delay: 6s;
+	width: 100px;
+	height: 100px;
+}
+.wrapper span:nth-child(8) {
+	left: 70%;
+	animation-delay: 8s;
+}
+.wrapper span:nth-child(9) {
+	left: 80%;
+	animation-delay: 6s;
+	width: 90px;
+	height: 90px;
+}
+.wrapper span:nth-child(10) {
+	left: 90%;
+	animation-delay: 4s;
+}
+.banner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+/* .content h2 b {
+	-webkit-text-fill-color: transparent;
+	-webkit-text-stroke-width: 3px;
+	-webkit-text-stroke-color: #fff;
+	font-family: montserrat;
+	font-size: 80px;
+	text-transform: uppercase;
+	letter-spacing: 12px;
+} */
+@keyframes animate {
+	0% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	80% {
+		opacity: .7;
+	}
+	100% {
+		transform: translateY(-800px) rotate(360deg);
+		opacity: 0;
+	}
+}
+.cursor {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: deepskyblue;
+	mix-blend-mode: difference;
+	pointer-events: none;
+	transform: translate(-50%, -50%);
+	transition: width 0.3s, height 0.3s, background-color 0.3s;
+	animation: glow 1s infinite alternate;
+}
+@keyframes glow {
+	0% {
+		box-shadow: 0 0 10px 5px rgba(0, 191, 255, 0.5);
+	}
+	100% {
+		box-shadow: 0 0 20px 10px rgba(0, 191, 255, 0.9);
+	}
+}
     </style>
 </head>
 <body>
     <nav class="nav">
-        <a class="nvb" href="todo">todo</a>
-        <a class="nvb" href="translate">translate</a>
-        <a class="nvb" href="play">games</a>
-        <a class="nvb" href="tools/image">tools</a>
+        <a class="nvb" href="todo">Todo</a>
+        <a class="nvb" href="translate">Translate</a>
+        <a class="nvb" href="play">Games</a>
+        <a class="nvb" href="tools/image">Tools</a>
+        <a class="nvb" href="anime">Anime</a>
     </nav>
-    <div class="main">
+    <div class="cursor"></div>
+    <!-- <div class="main">
         <div class="type">Introduction to programming</div>
     </div>
-    <div class="rest">
-
-        <img class="cloud" src="/static/asset/cloud.png" alt="">
-        <center><h1 style="color: black;">Made By:-</h1></center>
+    <div class="rest"> -->
+        <div class="wrapper">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+    </div>
+    <div class="banner">
+        <div class="content type">
+            <h2><b>Introduction to programming</b></h2>
+        </div>
+    </div>
+        <!-- <img class="cloud" src="/static/asset/cloud.png" alt=""> -->
+        <center><h1 style="color: white;">Made By:-</h1></center>
         <br><br><br><br>
         <div class="made">
 
@@ -294,6 +422,11 @@
         }
         window.onblur = tabBlur;
         window.onfocus = tabFocus;
+        document.addEventListener('mousemove', e => {
+            const cursor = document.querySelector('.cursor');
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        });
     </script>
 </body>
 </html>
