@@ -44,23 +44,6 @@
 }
 
 /* Style for received messages */
-/* #received-message {
-
-    background-color: #93bbe4;
-    color: #fff;
-    display: flex;
-    border-radius: 10px;
-    width: 300px;
-    padding: 10px;
-
-    margin-right: 20px;
-    text-align: center;
-    position: relative;
-    right: 0px;
-    left: 600px;
-} */
-
-/* Style for received messages */
 #received-message {
     background-color: #93bbe4;
     color: #fff;
