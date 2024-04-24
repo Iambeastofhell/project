@@ -1,0 +1,62 @@
+.boxes{
+    width:100vw;
+    height: 99vh;
+
+    display: flex;
+}
+
+body{
+    margin: 0;
+}
+
+#game-area{
+    width: 70%;
+    height: 99%;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#game-info{ 
+    width: 45%;
+    height: 99%;
+    background-color: beige;
+
+}
+#container{
+
+    display: grid;
+    grid-template-columns: 90px 90px 90px ;
+    grid-template-rows: 90px 90px 90px ;
+}
+#box{
+    border: 1px solid black;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-family: cursive;
+    font-weight: 400;
+}
+#box:active{
+    cursor: pointer;
+}
+#box:hover{
+    background-color: rgba(244, 205, 232, 0.568);
+    cursor: pointer;
+}
+
+.Info_turn{
+    font-size: 40px;
+    font-family: cursive;
+    font-weight: 300;
+
+}
+#game-info{
+    font-size: 40px;
+    font-family: cursive;
+    font-weight: 300;
+
+    padding-left: 20px;
+}
