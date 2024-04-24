@@ -58,6 +58,8 @@ console.log(checkEmail('12@smail.iitpkd.ac.in')+'*******************')
 var obj = {
     
 }
+
+var UserName ;
 var db = client.db('ChatBot');
 var collection = db.collection('users');
 collection.insertOne({active_user:'active_user'})
@@ -160,6 +162,14 @@ app.post('/home',async (req, res) => {
 app.get('/getUserDetail',(req,res)=>{
     res.send(JSON.stringify(data))
 })
+
+
+//This is for getting the Name of the active user 
+app.get('/getUserName',(req,res)=>{
+    res.send(JSON.stringify(obj.name))
+})
+
+
 app.get('/chatBot_client.js',(req,res)=>{
     console.log('Here it ask for the client file of the chatbot system ')
     const client = path.join(__dirname,'chatBot_client.js')
@@ -202,6 +212,7 @@ io.on('connection',async(socket)=>{
 
         else{
             console.log('Message emiited &&&&&&&&&&&&&&&&&&&&&&')
+            // message = obj.name+' : '+msg
             io.emit('message_server',msg)
         }
         console.log('Message form client : '+ address + ' is :  '+msg)
