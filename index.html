@@ -1,0 +1,107 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 40px;
+            height: 40px;
+            border: 1px solid black;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .empty {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Sudoku</h1>
+    <table>
+        {% for row in grid %}
+        <tr>
+            {% for cell in row %}
+            {% if cell == 0 %}
+            <td class="empty" contenteditable="true"></td>
+            {% else %}
+            <td>{{ cell }}</td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <button id="solve-btn">Solve</button>
+    <button id="check-btn">Check Solution</button>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('solve-btn').addEventListener('click', function () {
+            var grid = [];
+            document.querySelectorAll('table tr').forEach(function (row) {
+                var rowData = [];
+                row.querySelectorAll('td').forEach(function (cell) {
+                    var value = cell.innerText.trim();
+                    rowData.push(value === '' ? 0 : parseInt(value));
+                });
+                grid.push(rowData);
+            });
+            fetch('/solve', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ grid: grid })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var solution = data.solution;
+                    document.querySelectorAll('table tr').forEach(function (row, i) {
+                        row.querySelectorAll('td').forEach(function (cell, j) {
+                            cell.innerText = solution[i][j];
+                        });
+                    });
+                });
+        });
+
+        document.getElementById('check-btn').addEventListener('click', function () {
+            var grid = [];
+            document.querySelectorAll('table tr').forEach(function (row) {
+                var rowData = [];
+                row.querySelectorAll('td').forEach(function (cell) {
+                    var value = cell.innerText.trim();
+                    rowData.push(value === '' ? 0 : parseInt(value));
+                });
+                grid.push(rowData);
+            });
+            fetch('/check_solution', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ grid: grid })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var resultDiv = document.getElementById('result');
+                    if (data.is_correct) {
+                        resultDiv.innerText = 'Congratulations! Your solution is correct.';
+                    } else {
+                        resultDiv.innerText = 'Sorry, your s    olution is incorrect. Please try again.';
+                    }
+                });
+        });
+    </script>
+</body>
+
+</html>

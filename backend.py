@@ -1,3 +1,5 @@
+# backend.py
+
 from flask import Flask, render_template, request, jsonify
 from sudoku import Sudoku
 
@@ -8,7 +10,7 @@ sudoku_game.generate()
 
 @app.route('/')
 def index():
-    return render_template('sudokuindex.html', grid=sudoku_game.get_grid())
+    return render_template('index.html', grid=sudoku_game.get_grid())
 
 @app.route('/solve', methods=['POST'])
 def solve():
