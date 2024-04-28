@@ -80,10 +80,29 @@
                 scale: 1.2;
             }
         }
+        .nvb1{
+            color: #f0e6e6;
+            cursor: pointer;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            transition: scale 0.25s ease-in, opacity 0.25s ease-in, filter 0.25s ease-in;
+            padding: 5px;
+            margin: 5px;
+            font-size: 22px;
+            border-radius: 20%;
+            
+            &:hover{
+                scale: 1.5;
+            }
+        }
         .nav:has(.nvb:hover) .nvb:not(:hover){
             scale: 0.8;
             opacity: 0.8;
             filter: blur(5px);
+        }
+        .nav:has(.nvb1:hover) .nvb1:not(:hover){
+            scale: 0.8;
+            opacity: 0.8;
+            filter: blur(3px);
         }
         
         a{
@@ -353,21 +372,42 @@
 		box-shadow: 0 0 20px 10px rgba(0, 191, 255, 0.9);
 	}
 }
+.dropdown {
+  position: relative;
+}
+
+
+.dropcon {
+  display: none;
+  position: absolute; 
+  min-width: 100px; 
+  z-index: 1; 
+  padding: 10px;
+  background-color: black;
+  box-shadow: 0 0 20px 10px rgba(0, 191, 255, 0.9);
+
+}
+.dropdown:hover .dropcon {
+  display: block;
+ }
     </style>
 </head>
 <body>
     <nav class="nav">
         <a class="nvb" href="todo">Todo</a>
         <a class="nvb" href="translate">Translate</a>
-        <a class="nvb" href="play">Games</a>
+        <div class="dropdown nvb">
+            <a class="dropbtn">Games 
+            </a>
+            <div class="dropcon">
+              <a href="mine" class="nvb1">Minesweeper</a>
+              <a  href="play" class="nvb1">TicTacToe</a>
+            </div>
+          </div> 
         <a class="nvb" href="tools/image">Tools</a>
         <a class="nvb" href="anime">Anime</a>
     </nav>
     <div class="cursor"></div>
-    <!-- <div class="main">
-        <div class="type">Introduction to programming</div>
-    </div>
-    <div class="rest"> -->
         <div class="wrapper">
             <span></span>
             <span></span>

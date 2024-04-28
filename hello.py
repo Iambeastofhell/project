@@ -1,9 +1,9 @@
-from flask import Flask,render_template,request,redirect,url_for
+from flask import Flask,render_template,request,redirect,url_for,jsonify
 from datetime import datetime
 from googletrans import Translator,LANGUAGES
 import os,csv
 from PIL import Image,ImageFilter
-from random import sample,randint
+from random import sample,randint,choice
 tran=Translator()
 
 app = Flask(__name__)
@@ -262,3 +262,25 @@ def play_again():
   display_board = [['' for _ in range(COLS)] for _ in range(ROWS)]  # Board to display
   num_mines = 0 # Reset game state and redirect to main page
   return redirect(url_for("mine")) 
+
+@app.route('/rps')
+def rps():
+    return render_template('rpsindex.html')
+
+@app.route('/rpsplay', methods=['POST'])
+def rpsplay():
+    choices = ['rock', 'paper', 'scissors']
+    player_choice = request.json['choice']
+    computer_choice = choice(choices)
+
+    # Determine winner
+    if player_choice == computer_choice:
+        result = "It's a tie!"
+    elif (player_choice == 'rock' and computer_choice == 'scissors') or \
+         (player_choice == 'paper' and computer_choice == 'rock') or \
+         (player_choice == 'scissors' and computer_choice == 'paper'):
+        result = "You win!"
+    else:
+        result = "You lose!"
+
+    return jsonify({'result': result,'delay': 3})
