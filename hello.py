@@ -43,6 +43,7 @@ def play_tic_tac_toe():
                 result = f"Player {current_player} wins!"
                 return render_template('hello.html', result=result,current_player=current_player, board=board, counter=1)
             elif check_tie():
+                board = [""] * 9
                 result = "It's a tie!"
                 return render_template('hello.html',current_player=current_player,result=result, board=board, counter=0)
             else:

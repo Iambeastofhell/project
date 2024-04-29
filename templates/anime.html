@@ -18,18 +18,86 @@
   transform: scale(1.2);
 }
 
+.heading{
+    text-align: center;
+    font-size: 100px;
+    background: url("https://images.pexels.com/photos/3844786/pexels-photo-3844786.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") 50% 50%;
+    font-weight: 50px;
+    background-size: cover;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.container {
+  --light: rgb(255, 255, 255);
+  --dark: rgb(50, 50, 50);
+  --br: 8px;
+  position: relative;
+  left: 30%;
+}
 
+.container:hover .title {
+  opacity: 1;
+}
+
+.input {
+  background-color: transparent;
+  border: 2px solid white;
+  color: var(--light);
+  max-width: 400px;
+  padding: .5rem;
+  border-radius: var(--br);
+  outline: none;
+  opacity: .8;
+  transition: .2s ease-in-out;
+  width: 400px;
+}
+
+.input:focus {
+  opacity: 1;
+}
+
+.title {
+  border-radius: var(--br);
+  transform: translate(-50%, -150%);
+  background-color: var(--light);
+  transition: .2s ease-in-out;
+  opacity: 0;
+  color: var(--dark);
+  position: absolute;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: .5rem;
+}
+
+.title::before {
+  transform: translate(-50%, 50%) rotate(45deg);
+  background-color: var(--light);
+  position: absolute;
+  z-index: -1;
+  content: '';
+  width: 10px;
+  height: 10px;
+  bottom: 0;
+  left: 50%;
+}
+.lbl{
+    position: relative;
+    left: 30%;
+}
     </style>
 </head>
 <body>
-    <h1>anime recommendation list</h1>
+    <h1 class="heading">Anime recommendation list</h1>
 <video src="/static/asset/vid.mp4" autoplay muted loop></video>    
 <form action="\anime" method="post">
-        <label for="search">Search by name</label>
-        <input type="search" name="search" id="search"> <br>
-        {% for i in range(5) %} 
-        {{ useranime[i] }} <br>
-        <button type="submit" name="anime" value="{{ useranime[i][2] }}" id="anime{{ i }}">Add to List</button> <br> {% endfor %}
+    {% for i in range(5) %} 
+    {{ useranime[i] }} <br>
+    <button type="submit" name="anime" value="{{ useranime[i][2] }}" id="anime{{ i }}">Add to List</button> <br> {% endfor %}
+    <div class="container">
+        <div class="title">Search by name</div>
+        <input type="search" class="input" name="search" id="search">
+    </div>
     
      {% if ans %}
      <h2>Search results</h2>
