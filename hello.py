@@ -40,7 +40,6 @@ def play_tic_tac_toe():
             board[cell_index] = current_player
             if check_winner():
                 board = [""] * 9
-                current_player = "X"
                 result = f"Player {current_player} wins!"
                 return render_template('hello.html', result=result,current_player=current_player, board=board, counter=1)
             elif check_tie():
