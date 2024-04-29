@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animate</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+            background-color: black;
+            color: white;
+            font-size: medium;
+
+        }
+        .type{
+            overflow: hidden;
+            color: #000080;
+            border-right: 2px solid black;
+            white-space: nowrap;
+            letter-spacing: 0.1em; 
+            margin: 0 auto;
+            font-weight: bolder;
+            animation: typing 2s steps(15, end) forwards, blink .75s step-end infinite;
+            font-size: 37px;
+            text-shadow: 1px 1px 1px #ddd, -1px -1px 4px #d2f0fc;
+        }
+        @keyframes typing {
+            from{
+                width: 0%;
+            }
+            to{
+                width: 60%;
+            }
+        }
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
+        }
+        .main{
+            height: 130vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('/static/asset/bg.jpeg');
+            background-attachment: fixed;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+            margin-top: -80px;
+            background-position: 0px -150px;
+        }
+        .nav{
+            position: sticky;
+            top: 15px;
+            left: 25%;
+            width: 50%;
+            height: auto;
+            z-index: 100;
+            display: flex;
+            column-gap: 2rem;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            justify-content: center;
+		box-shadow: 0 0 10px 5px rgba(0, 191, 255, 0.5);
+            
+        }
+        .nvb{
+            color: #f0e6e6;
+            /* background-color: #008080; */
+            cursor: pointer;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            transition: scale 0.25s ease-in, opacity 0.25s ease-in, filter 0.25s ease-in;
+            padding: 5px;
+            margin: 5px;
+            font-size: 22px;
+            border-radius: 20%;
+            
+            &:hover{
+                scale: 1.2;
+            }
+        }
+        .nvb1{
+            color: #f0e6e6;
+            cursor: pointer;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            transition: scale 0.25s ease-in, opacity 0.25s ease-in, filter 0.25s ease-in;
+            padding: 5px;
+            margin: 5px;
+            font-size: 22px;
+            border-radius: 20%;
+            
+            &:hover{
+                scale: 1.5;
+            }
+        }
+        .nav:has(.nvb:hover) .nvb:not(:hover){
+            scale: 0.8;
+            opacity: 0.8;
+            filter: blur(5px);
+        }
+        .nav:has(.nvb1:hover) .nvb1:not(:hover){
+            scale: 0.8;
+            opacity: 0.8;
+            filter: blur(3px);
+        }
+        
+        a{
+            text-decoration: none;
+            color: white;
+            font-size: large;
+        }
+        .madeby{
+                display: flex;
+                justify-content: center; 
+                margin: 20px 0; 
+            }
+            .rest{
+            background-size: cover;
+                background-image: url("https://images.pexels.com/photos/531767/pexels-photo-531767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+            }
+            .madeitem{
+            position: relative;
+            overflow: hidden; 
+            perspective: 1000px; 
+            width: 300px; 
+            height: 350px;
+            transform: rotateY(-15deg) rotateZ(-15deg);
+            transition: transform 0.3s ease-in-out;
+        }
+        .madeitem img{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .madeitem h2{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .madeitem:hover{
+            transform: rotateY(0deg) rotateX(0deg); 
+        }
+        .madeitem:hover img, .madeitem:hover h2{
+            opacity: 1;
+        }
+        .cloud{
+            width: 100%;
+            height: 250px;
+            position: relative;
+            top: -60px;
+        }
+        :root {
+  --card-height: 300px;
+  --card-width: calc(var(--card-height) / 1.5);
+}
+.card {
+  width: var(--card-width);
+  height: var(--card-height);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0 36px;
+  perspective: 2500px;
+  margin: 0 50px;
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wrapper {
+  transition: all 0.5s;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+.card:hover .wrapper {
+  transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+  box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+}
+
+.wrapper::before,
+.wrapper::after {
+  content: "";
+  opacity: 0;
+  width: 100%;
+  height: 80px;
+  transition: all 0.5s;
+  position: absolute;
+  left: 0;
+}
+.wrapper::before {
+  top: 0;
+  height: 100%;
+  background-image: linear-gradient(
+    to top,
+    transparent 46%,
+    rgba(12, 13, 19, 0.5) 68%,
+    rgba(12, 13, 19) 97%
+  );
+}
+.wrapper::after {
+  bottom: 0;
+  opacity: 1;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 46%,
+    rgba(12, 13, 19, 0.5) 68%,
+    rgba(12, 13, 19) 97%
+  );
+}
+
+.card:hover .wrapper::before,
+.wrapper::after {
+  opacity: 1;
+}
+
+.card:hover .wrapper::after {
+  height: 120px;
+}
+.title {
+  width: 100%;
+  opacity: 0;
+  transition: transform 0.5s;
+  transition: opacity 1s;
+}
+.card:hover .title {
+  transform: translate3d(0%, -50px, 100px);
+  opacity: 1;
+}
+
+.character {
+  width: 100%;
+  opacity: 0;
+  transition: all 0.5s;
+  position: absolute;
+  z-index: -1;
+}
+
+.card:hover .character {
+  opacity: 1;
+  transform: translate3d(0%, -30%, 100px);
+}
+.made{
+    display: flex;
+    justify-content: space-evenly;
+}
+/* body {
+	background: #111;
+	height: 100vh;
+} */
+.wrapper span {
+	position: fixed;
+	bottom: -180px;
+	height: 50px;
+	width: 50px;
+	z-index: -1;
+	background-color: #18191f;
+	box-shadow: 0 0 50px #0072ff, 0 0 100px #0072ff, 0 0 150px #0072ff, 0 0 200px #0072ff;
+	animation: animate 10s linear infinite;
+}
+.wrapper span:nth-child(1) {
+	left: 60px;
+	animation-delay: 0.6s;
+}
+.wrapper span:nth-child(2) {
+	left: 10%;
+	animation-delay: 3s;
+	width: 60px;
+	height: 60px;
+}
+.wrapper span:nth-child(3) {
+	left: 20%;
+	animation-delay: 2s;
+}
+.wrapper span:nth-child(4) {
+	left: 30%;
+	animation-delay: 5s;
+	width: 80px;
+	height: 80px;
+}
+.wrapper span:nth-child(5) {
+	left: 40%;
+	animation-delay: 1s;
+}
+.wrapper span:nth-child(6) {
+	left: 50%;
+	animation-delay: 7s;
+}
+.wrapper span:nth-child(7) {
+	left: 60%;
+	animation-delay: 6s;
+	width: 100px;
+	height: 100px;
+}
+.wrapper span:nth-child(8) {
+	left: 70%;
+	animation-delay: 8s;
+}
+.wrapper span:nth-child(9) {
+	left: 80%;
+	animation-delay: 6s;
+	width: 90px;
+	height: 90px;
+}
+.wrapper span:nth-child(10) {
+	left: 90%;
+	animation-delay: 4s;
+}
+.banner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+/* .content h2 b {
+	-webkit-text-fill-color: transparent;
+	-webkit-text-stroke-width: 3px;
+	-webkit-text-stroke-color: #fff;
+	font-family: montserrat;
+	font-size: 80px;
+	text-transform: uppercase;
+	letter-spacing: 12px;
+} */
+@keyframes animate {
+	0% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	80% {
+		opacity: .7;
+	}
+	100% {
+		transform: translateY(-800px) rotate(360deg);
+		opacity: 0;
+	}
+}
+.cursor {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: deepskyblue;
+	mix-blend-mode: difference;
+	pointer-events: none;
+	transform: translate(-50%, -50%);
+	transition: width 0.3s, height 0.3s, background-color 0.3s;
+	animation: glow 1s infinite alternate;
+}
+@keyframes glow {
+	0% {
+		box-shadow: 0 0 10px 5px rgba(0, 191, 255, 0.5);
+	}
+	100% {
+		box-shadow: 0 0 20px 10px rgba(0, 191, 255, 0.9);
+	}
+}
+.dropdown {
+  position: relative;
+}
+
+
+.dropcon {
+  display: none;
+  position: absolute; 
+  min-width: 100px; 
+  z-index: 1; 
+  padding: 10px;
+  background-color: black;
+  box-shadow: 0 0 20px 10px rgba(0, 191, 255, 0.9);
+
+}
+.dropdown:hover .dropcon {
+  display: block;
+ }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a class="nvb" href="todo">Todo</a>
+        <a class="nvb" href="translate">Translate</a>
+        <div class="dropdown nvb">
+            <a class="dropbtn">Games 
+            </a>
+            <div class="dropcon">
+              <a href="mine" class="nvb1">Minesweeper</a>
+              <a  href="play" class="nvb1">TicTacToe</a>
+            </div>
+          </div> 
+        <a class="nvb" href="tools/image">Tools</a>
+        <a class="nvb" href="anime">Anime</a>
+        <a class="nvb" href="login">Login</a>
+    </nav>
+    <div class="cursor"></div>
+        <div class="wrapper">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+    </div>
+    <div class="banner">
+        <div class="content type">
+            <h2><b>Introduction to programming</b></h2>
+        </div>
+    </div>
+        <!-- <img class="cloud" src="/static/asset/cloud.png" alt=""> -->
+        <center><h1 style="color: white;">Made By:-</h1></center>
+        <br><br><br><br>
+        <div class="made">
+
+            <div class="card">
+                <div class="wrapper">
+              <img src="/static/asset/Img.jpg" class="cover-image" />
+            </div>
+            <img src="/static/asset/Vishesh .png" class="title" />
+            <img src="/static/asset/v.png" class="character" />
+        </div>
+        <div class="card">
+            <div class="wrapper">
+                <img src="/static/asset/a.jpg" class="cover-image" />
+            </div>
+            <img src="/static/asset/Aswin.png" class="title" />
+            <img src="/static/asset/ar.png" class="character" />
+        </div>
+        <div class="card">
+            <div class="wrapper">
+                <img src="/static/asset/z.jpg" class="cover-image" />
+            </div>
+            <img src="/static/asset/Zeeshan.png" class="title" />
+            <img src="/static/asset/zr.png" class="character" />
+        </div>
+    </div>
+    </div>
+        <script>
+        function tabBlur() {
+            document.title = "Leaving? 😭";
+        }
+        function tabFocus() {
+            document.title = "Introduction to programming";  
+        }
+        window.onblur = tabBlur;
+        window.onfocus = tabFocus;
+        document.addEventListener('mousemove', e => {
+            const cursor = document.querySelector('.cursor');
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        });
+    </script>
+</body>
+</html>

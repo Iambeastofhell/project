@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("main.html")
 
 board = [""] * 9
 current_player = "X"
@@ -284,3 +284,7 @@ def rpsplay():
         result = "You lose!"
 
     return jsonify({'result': result,'delay': 3})
+
+@app.route("/login")
+def login():
+    return redirect("http://10.128.5.173:8100/")
