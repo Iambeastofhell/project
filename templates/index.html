@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login page</title>
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
-    
+
     <form method="post" action="home" enctype="application/x-www-form-urlencoded">
         <label for="name">Name</label>
         <input name="name" type="text" id="name">
@@ -20,8 +22,36 @@
 
         <label for="password">Password</label>
         <input type="password" name="password" id="password">
-         <input type="submit" value="Submit">
-        </form>
+
+
+        <label for="otp">OTP</label>
+        <input type="text" name="otp" id="otp" placeholder="Enter OTP">
+        <button id="getOtpBtn" type="button">Get OTP</button>
+
+
+
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        var dataa = {
+            email: document.getElementById('email').value
+        }
+        console.log(document.getElementById('email').value)
+        console.log('HI')
+        const getOtpBtn = document.getElementById('getOtpBtn')
+        getOtpBtn.addEventListener('click', async () => {
+            console.log('We send an otp req ')
+            const fetchre = await fetch('/send-otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataa)
+            })
+        })
+
+    </script>
     <!-- <script src="./server.js"></script> -->
 </body>
+
 </html>
