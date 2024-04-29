@@ -1,34 +1,27 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>
-        Tic tae toe
-    </title>
-    <link rel="stylesheet" href="index.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@1,300&family=Josefin+Sans:wght@500&family=Nanum+Gothic+Coding:wght@700&family=Noto+Sans+TC&family=Philosopher:ital@1&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <link rel="stylesheet" href="index.css">
 </head>
-
 <body>
-    <div class="container">
-        <button class="Heading">
-            Welcome to Tic Tac Toe
-        </button>
-        <div class="content">
-            Hi! Welcome to the game of tic-tac-toe <br> If you want to play the game then click on the heading part to
-            generate the link
-        </div>
-        <div class="link_container">
-            <a target="_blank" class ="link" href="game_page.html">Start</a>
-        </div>
+    
+    <form method="post" action="home" enctype="application/x-www-form-urlencoded">
+        <label for="name">Name</label>
+        <input name="name" type="text" id="name">
 
-    </div>
+        <label for="handle_name">Handle Name</label>
+        <input name="handle_name" type="text" id="handle_name">
 
-    <script src="index.js"></script>
+        <label for="Email">Email</label>
+        <input type="email" name="email" id="email">
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+         <input type="submit" value="Submit">
+        </form>
+    <!-- <script src="./server.js"></script> -->
 </body>
-
 </html>
