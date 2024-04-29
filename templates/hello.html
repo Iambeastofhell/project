@@ -36,6 +36,9 @@
 
         <h1>Tic Tac Toe</h1>
         <p>Current Player: {{ current_player }}</p>
+        <p>{% if counter==1 %}
+            {{result}}
+            {% endif %}
         <table>
             {% for row in range(3) %}
             <tr>
