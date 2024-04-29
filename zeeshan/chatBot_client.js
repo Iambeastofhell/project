@@ -37,25 +37,28 @@ async function getActiveUserCount() {
 getActiveUserCount();
 
 
-var UserName ;
-
-async function getUserName(){
-    const res = await fetch('/getUserName');
-    UserName = await res.json();
-}
-
-getUserName()
+var UserName;
 
 
 button.addEventListener('click', (e) => {
     e.preventDefault();
+
+
+    async function getUserName() {
+        const res = await fetch('/getUserName');
+        UserName = await res.json();
+    }
+
+    getUserName()
+
+
     const msg = form.value;
 
     // Create a new message element 
     //This is the new message element which we have created to diplay 
     const messageElement = document.createElement('div');
     messageElement.classList.add('message');
-    
+
     messageElement.textContent = msg;
     messageElement.id = 'sent-message'; // Add id for CSS styling
 
@@ -70,7 +73,7 @@ button.addEventListener('click', (e) => {
 socket.on('message_server', (msg) => {
     const messageElement = document.createElement('div');
     messageElement.classList.add('message');
-    contentMessage = UserName+' : '+msg
+    contentMessage = UserName + ' : ' + msg
     messageElement.textContent = contentMessage;
     messageElement.id = 'received-message'; // Add id for CSS styling
     box.appendChild(messageElement);
