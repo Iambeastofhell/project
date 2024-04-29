@@ -14,7 +14,8 @@ def index():
 
 board = [""] * 9
 current_player = "X"
-
+counter=2
+result=''
 def check_winner():
     for i in range(0, 3):
         if board[i] == board[i + 3] == board[i + 6] != "":
@@ -29,11 +30,10 @@ def check_winner():
 
 def check_tie():
     return "" not in board
-
 @app.route('/play', methods=['GET', 'POST'])
 def play_tic_tac_toe():
-    global current_player,board
-    print(board)
+    global current_player,board,result
+
     if request.method == 'POST':
         cell_index = int(request.form['cell'])
         if board[cell_index] == "":
@@ -42,15 +42,14 @@ def play_tic_tac_toe():
                 board = [""] * 9
                 current_player = "X"
                 result = f"Player {current_player} wins!"
-                return render_template('hellores.html', result=result, board=board)
+                return render_template('hello.html', result=result,current_player=current_player, board=board, counter=1)
             elif check_tie():
                 result = "It's a tie!"
-                return render_template('hellores.html', result=result, board=board)
+                return render_template('hello.html',current_player=current_player,result=result, board=board, counter=0)
             else:
                 current_player = "O" if current_player == "X" else "X"
 
-    return render_template('hello.html', board=board, current_player=current_player)
-
+    return render_template('hello.html', board=board, current_player=current_player,result=result,counter=2)
 
 tasks = []
 completed=[]
