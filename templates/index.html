@@ -2,117 +2,6 @@
     <!DOCTYPE html>
     <html lang="en">
 
-<<<<<<< HEAD
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Nanum Gothic', sans-serif; /* Use Nanum Gothic font */
-            background-image: url("https://images.pexels.com/photos/1025469/pexels-photo-1025469.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-            background-size: cover;
-        }
-        input {
-            font-family: 'Nanum Gothic', sans-serif; /* Use Nanum Gothic font */
-        }
-        .login-box {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 400px;
-            padding: 40px;
-            height: 75vh;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, .6);
-            box-sizing: border-box;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
-            border-radius: 10px;
-        }
-
-        .login-box .user-box {
-            position: relative;
-        }
-
-        .login-box .user-box input {
-            width: 100%;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #fff;
-            margin-bottom: 30px;
-            border: none;
-            border-bottom: 1px solid #fff;
-            outline: none;
-            background: transparent;
-        }
-
-        .login-box .user-box label {
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #fff;
-            pointer-events: none;
-            transition: .5s;
-        }
-
-        .login-box .user-box input:focus~label,
-        .login-box .user-box input:valid~label {
-            top: -20px;
-            left: 0;
-            color: #bdb8b8;
-            font-size: 12px;
-        }
-
-        .login-box form button {
-            position: absolute;
-            /* display: inline-block; */
-            padding: 10px 20px;
-            color: #ffffff;
-            font-size: 16px;
-            text-decoration: none;
-            text-transform: uppercase;
-            overflow: hidden;
-            transition: .5s;
-            margin-top: 20px;
-            letter-spacing: 4px;
-            background: transparent;
-            border: 2px solid white;
-            top: 70px;
-            left: 0px;
-            cursor: pointer;
-        }
-
-        .login-box form button:hover {
-            background: #03f40f;
-            color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 5px #03f40f,
-                0 0 25px #03f40f,
-                0 0 50px #03f40f,
-                0 0 100px #03f40f;
-        }
-        .sbmt:hover {
-            background: #03f40f;
-            color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 5px #03f40f,
-                0 0 25px #03f40f,
-                0 0 50px #03f40f,
-                0 0 100px #03f40f;
-        }
-
-        .login-box form button span {
-            position: absolute;
-            display: block;
-        }
-
-        @keyframes btn-anim1 {
-            0% {
-                left: -100%;
-=======
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,7 +25,6 @@
                 box-sizing: border-box;
                 box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
                 border-radius: 10px;
->>>>>>> a9d61f312a66e6137da0e52044c748ad9caa2a8d
             }
 
             .login-box .user-box {
@@ -166,7 +54,6 @@
                 transition: .5s;
             }
 
-<<<<<<< HEAD
         .sbmt{
             position: absolute;
             top: 106%; /* Adjust the distance below the Get OTP button */
@@ -185,36 +72,79 @@
             border: 2px solid white;
             font-family: 'Courier New', Courier, monospace; /* Set the font to a monospace style */
         }
+        .login-box .user-box input:focus~label,
+        .login-box .user-box input:valid~label {
+            top: -20px;
+            left: 0;
+            color: #bdb8b8;
+            font-size: 12px;
+        }
+
+        .login-box form button {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #ffffff;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 40px;
+            letter-spacing: 4px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .login-box form button:hover {
+            background: #03f40f;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #03f40f,
+                0 0 25px #03f40f,
+                0 0 50px #03f40f,
+                0 0 100px #03f40f;
+        }
+        
+        .login-box form button span {
+            position: absolute;
+            display: block;
+        }
+        
+        @keyframes btn-anim1 {
+            0% {
+                left: -100%;
+            }
+        
+            50%,
+            100% {
+                left: 100%;
+            }
+        }
+        
+        .login-box form button span:nth-child(1) {
+            bottom: 2px;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #03f40f);
+            animation: btn-anim1 2s linear infinite;
+        }
+        
+        .login-box form {
+            position: relative;
+        }
+        
+        .login-box form button[type="submit"] {
+            position: absolute;
+            top: calc(100% + 20px); /* Adjust the distance below the Get OTP button */
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Courier New', Courier, monospace; /* Set the font to a monospace style */
+        }
     </style>
 </head>
-=======
-            .login-box .user-box input:focus~label,
-            .login-box .user-box input:valid~label {
-                top: -20px;
-                left: 0;
-                color: #bdb8b8;
-                font-size: 12px;
-            }
->>>>>>> a9d61f312a66e6137da0e52044c748ad9caa2a8d
 
-            .login-box form button {
-                position: relative;
-                display: inline-block;
-                padding: 10px 20px;
-                color: #ffffff;
-                font-size: 16px;
-                text-decoration: none;
-                text-transform: uppercase;
-                overflow: hidden;
-                transition: .5s;
-                margin-top: 40px;
-                letter-spacing: 4px;
-                background: transparent;
-                border: none;
-                cursor: pointer;
-            }
-
-<<<<<<< HEAD
     <div class="login-box">
         <form method="post" action="home" enctype="application/x-www-form-urlencoded">
             <div class="user-box">
@@ -241,54 +171,6 @@
             <center><input type="submit" class="sbmt" value="Submit"><span></span></center>
         </form>
     </div>
-=======
-            .login-box form button:hover {
-                background: #03f40f;
-                color: #fff;
-                border-radius: 5px;
-                box-shadow: 0 0 5px #03f40f,
-                    0 0 25px #03f40f,
-                    0 0 50px #03f40f,
-                    0 0 100px #03f40f;
-            }
->>>>>>> a9d61f312a66e6137da0e52044c748ad9caa2a8d
-
-            .login-box form button span {
-                position: absolute;
-                display: block;
-            }
-
-            @keyframes btn-anim1 {
-                0% {
-                    left: -100%;
-                }
-
-                50%,
-                100% {
-                    left: 100%;
-                }
-            }
-
-            .login-box form button span:nth-child(1) {
-                bottom: 2px;
-                left: -100%;
-                width: 100%;
-                height: 2px;
-                background: linear-gradient(90deg, transparent, #03f40f);
-                animation: btn-anim1 2s linear infinite;
-            }
-
-            .login-box form {
-                position: relative;
-            }
-
-            .login-box form button[type="submit"] {
-                position: absolute;
-                top: calc(100% + 20px); /* Adjust the distance below the Get OTP button */
-                left: 50%;
-                transform: translateX(-50%);
-                font-family: 'Courier New', Courier, monospace; /* Set the font to a monospace style */
-            }
         </style>
     </head>
 
