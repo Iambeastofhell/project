@@ -33,8 +33,8 @@ A dedicated platform where students of IIT Palakkad can interact, share knowledg
 py -m flask --app hello.py run
 ```
 ```javascript
-node server_login.j
-#This will start the server
+node server_login.js
+//This will start the server
 ```
 
 ## How to start the database(MongoDb) in terminal 
