@@ -1,3 +1,5 @@
+# Credits to Rajdeep for implementation
+
 import random
 
 class Sudoku:
