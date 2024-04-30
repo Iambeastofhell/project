@@ -300,10 +300,22 @@ io.on('connection', async (socket) => {
 
 //this function will give the user list active no. 
 app.get('/getActiveUser', async (req, res) => {
-
-    var count = await (collection.findOne({ active_user: 'active_user' }))
-    console.log(count)
-    count = count.active_user_no
-    console.log(count)
-    res.send(JSON.stringify(count))
-})
+    try {
+        var count = await collection.findOne({ active_user: 'active_user' });
+        if (count) {
+            console.log(count);
+            count = count.active_user_no;
+            console.log(count);
+            res.send(JSON.stringify(count));
+        } 
+        else {
+            // Handle the case when no document is found
+            // res.status(404).send('No active user found');
+        }
+    } 
+    catch (error) {
+        // Handle any other errors that might occur during the database operation
+        console.error('Error retrieving active user count:', error);
+        // res.status(500).send('Internal server error');
+    }
+});
