@@ -6,6 +6,7 @@ const activeUsertag = document.getElementById('activeUser')
 
 
 // Fetch user details and display them here we are just asking for the user detail to make them display also 
+//Here we are just getting the active no of the user and we are rendering the name of the active user 
 async function getUserDetail() {
     try {
         const response = await fetch('/getUserDetail');
@@ -71,6 +72,7 @@ button.addEventListener('click', (e) => {
 });
 
 // Listen for incoming messages from the server
+// Here we will directly add the message in the HTML
 socket.on('message_server', (msg) => {
     const messageElement = document.createElement('div');
     messageElement.classList.add('message');
