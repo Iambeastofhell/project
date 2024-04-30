@@ -72,7 +72,7 @@ py -m flask --app <file_name>.py run
 user: 'thatawesomeproject@gmail.com',
 pass: 'vdno ohkm pkkv wjac'
 ```
-#Then click on the link given below to run that file
+
 
 ## Contributing
 Vishesh, Zeeshan, Aswin
