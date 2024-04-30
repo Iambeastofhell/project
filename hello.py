@@ -13,7 +13,7 @@ app = Flask(__name__)
 def index():
     return render_template("main.html")
 
-
+#code for tic tac toe
 board = [""] * 9
 current_player = "X"
 counter=2
@@ -53,6 +53,14 @@ def play_tic_tac_toe():
                 current_player = "O" if current_player == "X" else "X"
 
     return render_template('hello.html', board=board, current_player=current_player,result=result,counter=2)
+
+
+
+
+#to do list
+
+
+
 
 tasks = []
 completed=[]
@@ -99,6 +107,13 @@ def update_task(task_index):
             dat=datetime.now().strftime("%c")
             tasks[task_index][1]=dat
         return redirect(url_for('todo'))
+
+
+
+#translate
+
+
+
 translated=""
 
 @app.route('/todo/delete_task/<int:task_index>', methods=['GET', 'POST'])
@@ -127,6 +142,11 @@ def translate():
     else:
         return render_template("translate.html", text="No text translated yet")
 
+
+
+#image modifications
+
+
 @app.route("/tools/image/post", methods=['POST',"GET"])
 def image():
     img=request.files['image']
@@ -154,6 +174,13 @@ def img():
     name=""
     out=""
     return render_template("image.html",name=name,out=out)
+
+
+
+#anime recommendation system
+
+
+
 useranime=[]  
 search=""
 imo=False
@@ -196,6 +223,11 @@ def anime():
        recomlst=sample(useranime,k=5)
     useranime=sample(useranime,k=10)
     return render_template("anime.html",useranime=useranime,ans=ans,recomend=recomend,recomlst=recomlst,imo=imo)
+
+
+
+
+#minesweeper
 
 
 
@@ -263,6 +295,12 @@ def play_again():
   display_board = [['' for _ in range(COLS)] for _ in range(ROWS)]  # Board to display
   num_mines = 0 # Reset game state and redirect to main page
   return redirect(url_for("mine")) 
+
+
+#rock paper scissor
+
+
+
 @app.route('/rps')
 def rps():
     return render_template('rpsindex.html')
@@ -288,6 +326,12 @@ def rpsplay():
 @app.route("/login")
 def login():
     return redirect("http://10.128.5.173:8100/")
+
+
+
+#sudoku
+
+
 
 sudoku_game = Sudoku() #using Sudoku class defined in sudoku.py
 sudoku_game.generate() # generating  a sudoku grid
