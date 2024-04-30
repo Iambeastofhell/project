@@ -1,5 +1,11 @@
 # Project Name: ThatAwesomeProject
 
+## Contributors
+
+- Zeeshan: 112301040
+- Vishesh: 112301037
+- Aswin: 132301008
+
 ## Overview
 ThatAwesomeProject is a multifunctional toolset designed to cater to various needs, ranging from gaming to everyday utility tools, along with a community forum for enhanced communication.
 
@@ -14,7 +20,8 @@ ThatAwesomeProject is a multifunctional toolset designed to cater to various nee
 ### Tools for Daily Usage
 - Image Converter
 - Google Translator
-- Blur Image
+- Blur Image, Rotate Image, Grey Image
+- To Do List
 
 
 ### Community Forum
@@ -22,6 +29,16 @@ A dedicated platform where students of IIT Palakkad can interact, share knowledg
 
 
 ## How to run Project
+
+```python
+py -m flask --app hello.py run
+```
+```javascript
+node server_login.js
+//This will start the server
+```
+
+## How to start the database(MongoDb) in terminal 
 
 ```bash
 sudo systemctl start mongod  
@@ -64,16 +81,10 @@ db.dropDatabase()
 ```
 
 
-```python
-py -m flask --app <file_name>.py run
-```
-
 ```javascript
 user: 'thatawesomeproject@gmail.com',
 pass: 'vdno ohkm pkkv wjac'
 ```
 
 
-## Contributing
-Vishesh, Zeeshan, Aswin
 
