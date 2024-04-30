@@ -19,10 +19,9 @@ ThatAwesomeProject is a multifunctional toolset designed to cater to various nee
 
 ### Tools for Daily Usage
 - To Do List
-- Image Converter
 - Google Translator
 - Blur Image, Rotate Image, Greyscale Image
-
+- Anime Recommendation system
 
 ### Community Forum
 A dedicated platform where students of IIT Palakkad can interact, share knowledge, and communicate easily.

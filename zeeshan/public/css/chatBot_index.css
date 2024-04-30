@@ -131,7 +131,11 @@ body{
 }
 
 .h{
-    font-size: 50px;
-    font-weight: 50px;
-    
+    text-align: center;
+    font-size: 100px;
+    background: url("https://images.pexels.com/photos/7130537/pexels-photo-7130537.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") 50% 50%;
+    font-weight: 100px;
+    background-size: cover;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
 }
