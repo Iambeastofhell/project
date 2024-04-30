@@ -12,9 +12,16 @@
 #box::-webkit-scrollbar{
     display: none;
 }
+#heading{
+    position: absolute;
+    left: 40%;
+    font-weight: 70px;
+    font-family: 'Nanum Gothic', sans-serif; 
+}
 body{
     background-image: url("https://images.pexels.com/photos/763097/pexels-photo-763097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
     background-size: cover;
+    font-family: 'Nanum Gothic', sans-serif; 
 }
 /* Style for user input form */
 #form {
@@ -58,17 +65,18 @@ body{
 
 
 #activeUser {
-    position: sticky;
-    display: flex;
-    width: calc(100% - 70px); 
+    position: absolute;
+    width: 170px; 
     padding: 10px;
     justify-content: space-around;
-    top: 0;
+    bottom: 0;
     left: 0;
+    color: white;
+    font-weight: 30px;
     border: 1px solid black;
     border-radius: 5px;
     margin-bottom: 10px;
-    background-color: #f0f0f0;
+    background-color: transparent;
 }
 
 
@@ -122,3 +130,8 @@ body{
     text-align: center;
 }
 
+.h{
+    font-size: 50px;
+    font-weight: 50px;
+    
+}

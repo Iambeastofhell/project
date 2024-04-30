@@ -283,7 +283,8 @@ io.on('connection', async (socket) => {
 
         else {
          
-            // message = obj.name+' : '+msg
+            message = obj.name+' : '+msg
+            console.log(message,'********')
             socket.broadcast.emit('message_server', msg)
         }
         console.log('Message form client : ' + address + ' is :  ' + msg)

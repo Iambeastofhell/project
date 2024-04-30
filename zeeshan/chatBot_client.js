@@ -18,14 +18,18 @@ async function getUserDetail() {
 
 getUserDetail();
 
-box.innerHTML += 'Hi, how are you? Now you are connected to the chatBot<br>';
+const classmessage = document.createElement('div')
+classmessage.id = 'heading'
+classmessage.innerHTML+='Hi, how are you? Now you are connected to the chatBot<br>'
+box.appendChild(classmessage)
+
 
 // Fetch active user count and display it
 async function getActiveUserCount() {
     try {
         const response = await fetch('/getActiveUser');
         const data = await response.json();
-        activeUsertag.innerHTML += '<br> Current No of Active User Count: ' + data + '<br>';
+        // activeUsertag.innerHTML += '<br> Current No of Active User Count: ' + data + '<br>';
     } catch (error) {
         console.error('Error fetching active user count:', error);
     }
@@ -70,8 +74,8 @@ button.addEventListener('click', (e) => {
 socket.on('message_server', (msg) => {
     const messageElement = document.createElement('div');
     messageElement.classList.add('message');
-    contentMessage = UserName + ' : ' + msg
-    messageElement.textContent = contentMessage;
+    // contentMessage = UserName + ' : ' + msg
+    messageElement.textContent = msg;
     messageElement.id = 'received-message'; // Add id for CSS styling
     box.appendChild(messageElement);
 });
