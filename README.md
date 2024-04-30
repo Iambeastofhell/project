@@ -1,10 +1,27 @@
-##ChatBot##
-##Sudoku##
-##MineSweeper##
-Todo list
-anime recommendation system
-image blur, greyscale and rotate
+# Project Name: ThatAwesomeProject
 
+## Overview
+ThatAwesomeProject is a multifunctional toolset designed to cater to various needs, ranging from gaming to everyday utility tools, along with a community forum for enhanced communication.
+
+## Features
+
+### Games
+- Sudoku
+- Minesweeper
+- Tic-Tac-Toe
+- Rock-Paper-Scissors
+
+### Tools for Daily Usage
+- Image Converter
+- Google Translator
+- Blur Image
+
+
+### Community Forum
+A dedicated platform where students of IIT Palakkad can interact, share knowledge, and communicate easily.
+
+
+## How to run Project
 
 ```bash
 sudo systemctl start mongod  
@@ -56,3 +73,7 @@ user: 'thatawesomeproject@gmail.com',
 pass: 'vdno ohkm pkkv wjac'
 ```
 #Then click on the link given below to run that file
+
+## Contributing
+Vishesh, Zeeshan, Aswin
+
