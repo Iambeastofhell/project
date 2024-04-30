@@ -10,6 +10,8 @@
     <style>
         body {
             font-family: 'Nanum Gothic', sans-serif; /* Use Nanum Gothic font */
+            background-image: url("https://images.pexels.com/photos/1025469/pexels-photo-1025469.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+            background-size: cover;
         }
         input {
             font-family: 'Nanum Gothic', sans-serif; /* Use Nanum Gothic font */
@@ -20,8 +22,9 @@
             left: 50%;
             width: 400px;
             padding: 40px;
+            height: 75vh;
             transform: translate(-50%, -50%);
-            background: rgba(24, 20, 20, 0.987);
+            background-color: rgba(0, 0, 0, .6);
             box-sizing: border-box;
             box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
             border-radius: 10px;
@@ -63,8 +66,8 @@
         }
 
         .login-box form button {
-            position: relative;
-            display: inline-block;
+            position: absolute;
+            /* display: inline-block; */
             padding: 10px 20px;
             color: #ffffff;
             font-size: 16px;
@@ -72,14 +75,25 @@
             text-transform: uppercase;
             overflow: hidden;
             transition: .5s;
-            margin-top: 40px;
+            margin-top: 20px;
             letter-spacing: 4px;
             background: transparent;
-            border: none;
+            border: 2px solid white;
+            top: 70px;
+            left: 0px;
             cursor: pointer;
         }
 
         .login-box form button:hover {
+            background: #03f40f;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #03f40f,
+                0 0 25px #03f40f,
+                0 0 50px #03f40f,
+                0 0 100px #03f40f;
+        }
+        .sbmt:hover {
             background: #03f40f;
             color: #fff;
             border-radius: 5px;
@@ -118,11 +132,22 @@
             position: relative;
         }
 
-        .login-box form button[type="submit"] {
+        .sbmt{
             position: absolute;
-            top: calc(100% + 20px); /* Adjust the distance below the Get OTP button */
-            left: 50%;
+            top: 106%; /* Adjust the distance below the Get OTP button */
+            right: -50px;
             transform: translateX(-50%);
+            padding: 10px 20px;
+            color: #ffffff;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            /* margin-top: 20px; */
+            letter-spacing: 4px;
+            background: transparent;
+            border: 2px solid white;
             font-family: 'Courier New', Courier, monospace; /* Set the font to a monospace style */
         }
     </style>
@@ -153,7 +178,7 @@
                 <label for="otp">OTP</label>
                 <button type="button" id="getOtpBtn">Get OTP</button>
             </div>
-            <center><input type="submit" value="Submit"><span></span></center>
+            <center><input type="submit" class="sbmt" value="Submit"><span></span></center>
         </form>
     </div>
 

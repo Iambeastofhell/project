@@ -18,10 +18,10 @@ ThatAwesomeProject is a multifunctional toolset designed to cater to various nee
 - Rock-Paper-Scissors
 
 ### Tools for Daily Usage
+- To Do List
 - Image Converter
 - Google Translator
-- Blur Image, Rotate Image, Grey Image
-- To Do List
+- Blur Image, Rotate Image, Greyscale Image
 
 
 ### Community Forum
@@ -31,7 +31,7 @@ A dedicated platform where students of IIT Palakkad can interact, share knowledg
 ## How to run Project
 
 ```python
-py -m flask --app hello.py run
+py -m flask --app hello.py run or flask --app hello run
 ```
 ```javascript
 node server_login.js
