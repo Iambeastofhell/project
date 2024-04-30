@@ -202,46 +202,46 @@ def anime():
 ROWS = 8 # we set the numbers of rows and columns as 8*8 respectively for now. but can try to go for custom settings
 COLS = 8
 MINE_PROBABILITY = 0.1  # this here is the chace of a tile to be a mine 
-board = [["" for _ in range(COLS)] for _ in range(ROWS)]  # this is the board that is containing the mines
+boardm = [["" for _ in range(COLS)] for _ in range(ROWS)]  # this is the board that is containing the mines
 display_board = [['' for _ in range(COLS)] for _ in range(ROWS)]  # this board is to be to displayed
 num_mines = 0
 def generate_board():
-  global board,display_board,num_mines
+  global boardm,display_board,num_mines
   while num_mines < int(ROWS * COLS * MINE_PROBABILITY): # rows* cols * mine_probability is to get the total number of mines 
     row = randint(0, ROWS - 1)
     col = randint(0, COLS - 1)
-    if board[row][col] != -1:  # to prevent placing of a mine on already existing mine
-      board[row][col] = -1 # -1 is to denote a mine in the place
+    if boardm[row][col] != -1:  # to prevent placing of a mine on already existing mine
+      boardm[row][col] = -1 # -1 is to denote a mine in the place
       # here we are alotting the tiles as mines
       num_mines += 1
-  return board, display_board
+  return boardm, display_board
 
-def count_adjacent_mines(board, row, col): 
+def count_adjacent_mines(boardm, row, col): 
   count = 0
   for i in range(row - 1, row + 2):
     for j in range(col - 1, col + 2):
-      if  board[i][j] == -1:
+      if  boardm[i][j] == -1:
         count += 1
   return count
 
 @app.route('/mine', methods=["GET", "POST"])
 def mine():
-  global board,display_board,num_mines
+  global boardm,display_board,num_mines
   if request.method == "GET":
     game_over = False  # Initialising the game 
     win = False
-    return render_template("minesweeper.html", board=display_board, game_over=game_over, win=win)
+    return render_template("minesweeper.html", boardm=display_board, game_over=game_over, win=win)
   else:
     row = int(request.form["row"])
     col = int(request.form["col"])
-    board, display_board = generate_board()
+    boardm, display_board = generate_board()
     if board[row][col] == -1:
       # When game finishes all mines are revealed
       for i in range(ROWS):
         for j in range(COLS):
-          if board[i][j] == -1:
+          if boardm[i][j] == -1:
             display_board[i][j] = "*"
-      return render_template("minesweeper.html", board=display_board, game_over=True)
+      return render_template("minesweeper.html", boardm=display_board, game_over=True)
     else:
       num_mines = count_adjacent_mines(board, row, col)
       display_board[row][col] = str(num_mines) if num_mines else ""
@@ -249,17 +249,17 @@ def mine():
       win = True
       for i in range(ROWS):
         for j in range(COLS):
-          if board[i][j] != -1 and display_board[i][j] == "":
+          if boardm[i][j] != -1 and display_board[i][j] == "":
             win = False
             break
       if win:
-        return render_template("minesweeper.html", board=display_board, game_over=True, win=True)
-      return render_template("minesweeper.html", board=display_board, game_over=False)  # Game continues
+        return render_template("minesweeper.html", boardm=display_board, game_over=True, win=True)
+      return render_template("minesweeper.html", boardm=display_board, game_over=False)  # Game continues
 
 @app.route("/play_again")
 def play_again():
-  global board,display_board,num_mines
-  board = [["" for _ in range(COLS)] for _ in range(ROWS)]  # Hidden board with mines
+  global boardm,display_board,num_mines
+  boardm = [["" for _ in range(COLS)] for _ in range(ROWS)]  # Hidden board with mines
   display_board = [['' for _ in range(COLS)] for _ in range(ROWS)]  # Board to display
   num_mines = 0 # Reset game state and redirect to main page
   return redirect(url_for("mine")) 
