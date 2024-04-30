@@ -3,6 +3,7 @@ const fs = require('fs');
 const app = express();
 const path = require('path');
 
+//This will hash the password 
 const bcrypt = require('bcrypt');
 
 const { MongoClient } = require('mongodb');
@@ -10,7 +11,10 @@ const { MongoClient } = require('mongodb');
 const uri = 'mongodb://localhost:27017';
 
 const client = new MongoClient(uri);
+
+//This will parse the json file
 app.use(express.json());
+
 const { Server } = require('socket.io');
 
 const { json } = require('body-parser');
@@ -18,6 +22,7 @@ const { json } = require('body-parser');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'))
 
+//This will send the node mailer
 const nodemailer = require('nodemailer');
 const port = 8100;
 
@@ -28,6 +33,7 @@ async function connectToDb() {
 }
 connectToDb();
 
+//In root path we are sending the index.htmlfile file(mainlogin page )
 app.get('/', (req, res) => {
 
     const indexHtml = path.join(__dirname, 'index.html');
@@ -43,17 +49,7 @@ function generateRandomNumber() {
 }
 
 
-console.log(generateRandomNumber(), '***********************************************************');
 
-
-// app.post('send-otp',(req,res)=>{
-
-
-
-
-
-      
-// })
 async function hashpassword(safe) {
     const saltRound = 10;
     const hashedPass = await bcrypt.hash(safe, saltRound);
@@ -67,12 +63,11 @@ async function verifyPassword(safe, hashedPasswordWithSalt) {
 
 //This function will check whether the email is from the college or not 
 function checkEmail(email) {
-    if (email.includes('@smail.iitpkd.ac.in')) {
+    if (email.includes('@smail.iitpkd.ac.in') || email.included('anish@iitpkd.ac.in) {
         return true
     }
     return false
 }
-console.log(checkEmail('12@smail.iitpkd.ac.in') + '*******************')
 var obj = {
 
 }
@@ -86,26 +81,12 @@ var otpp = generateRandomNumber();
 
 
 
-// app.post('/verify-otp', (req, res) => {
-//     // Implement OTP verification logic
-//     // const email = req.body.email;
-//     const otp = req.body.otp;
-//     console.log('&^^^^^^^^^^^^^^^^^^^^^^^^^^^%%%%%%%%%%&%&%&%&%&%&%&%&%%&&%')
-//     // Compare entered OTP with the stored OTP in the server or database
-//     // If OTP is correct, send success response
-//     // Otherwise, send error response
-//     if (otp ===  generateRandomNumber()) {
-//         res.status(200).send('OTP verified successfully');
-//     } else {
-//         res.status(400).send('Invalid OTP');
-//     }
-// });
-
 
 var checkOtp ;
 
 app.post('/send-otp', async (req, res) => {
     try {
+        //THis will send an email after clicking the get Otp button
         let mailTransporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -114,16 +95,15 @@ app.post('/send-otp', async (req, res) => {
             }
         });
 
-        // Assuming you have the OTP stored in a variable called otp
-        // This is just an example, you should generate a random OTP
-        // let otp = generateRandomNumber(); // This is just an example, you should generate a random OTP
+        //The aboveemail id and the password are the mail id from which we will
+        //be sending the mail from that password 
 
-        console.log(req.body.email,'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%',req.email)
+        console.log(req.body.email,req.email)
         let mailDetails = {
             from: 'thatawesomeproject@gmail.com',
             to: req.body.email,
             subject: 'Login mail',
-            text: `You successfully login to the web page. Your OTP is: ${otpp}. Now you can use the ChatBot`
+            text: `Your OTP is: ${otpp}.Fill this OTP and then you can use the ChatBot`
         };
 
         await mailTransporter.sendMail(mailDetails);
@@ -141,7 +121,7 @@ app.post('/home', async (req, res) => {
 
     //Hashing of the password by calling the hashpassword funciotn 
     var hashed_password = await hashpassword(req.body.password);
-    console.log(req.body.otp,'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    console.log(req.body.otp)
     console.log(hashed_password);
 
     //Makin the obj variable which will store all the data of the current user
@@ -152,6 +132,7 @@ app.post('/home', async (req, res) => {
         'password': hashed_password
     }
 
+    //This will  update the user Count No 
     collection.updateOne({ active_user: 'active_user' }, { $set: { active_user_no: 1 } })
 
     //Checking if the user is present or not 
@@ -167,6 +148,7 @@ app.post('/home', async (req, res) => {
         const password = await verifyPassword(req.body.password, existingUser.password);
         console.log('User with email already exists:', req.body.email);
 
+        
         console.log('User dont added ');
 
         if (password) {
@@ -215,7 +197,7 @@ app.post('/home', async (req, res) => {
     from: 'thatawesomeproject@gmail.com',
     to: req.body.email,
     subject: 'Login mail',
-    text: `You successfully login to the web page. Your OTP is: ${otpp}. Now you can use the ChatBot`
+    text: `You successfully login to the web page. Now you can use the ChatBot`
     };
     
     mailTransporter
@@ -237,7 +219,7 @@ app.post('/home', async (req, res) => {
 
 })
 
-
+//This function will give the userDetail to the client side to render it on html page
 app.get('/getUserDetail', (req, res) => {
     res.send(JSON.stringify(data))
 })
@@ -248,24 +230,12 @@ app.get('/getUserName', (req, res) => {
     res.send(JSON.stringify(obj.name))
 })
 
-
+//This will provdie the js client side page when user will enter the chatBot page 
 app.get('/chatBot_client.js', (req, res) => {
     console.log('Here it ask for the client file of the chatbot system ')
     const client = path.join(__dirname, 'chatBot_client.js')
     res.sendFile(client)
 })
-
-
-
-// app.post('/checkOtp',(req,res)=>{
-//     otpvalue = req.data
-//     console.log(otpvalue)
-//     console.log(req,'###############################################################333')
-// })
-
-
-
-
 
 
 
@@ -278,40 +248,48 @@ const server = app.listen(port, () => {
     console.log('Server is running on the port no ' + port)
 })
 
-
+//This will initialize the connecton with the socket.io
 const io = new Server(server)
+
 io.on('connection', async (socket) => {
+    
     console.log('A user connected')
+    
     await collection.updateOne({ active_user: 'active_user' }, { $inc: { active_user_no: 1 } })
+    
     var a = await collection.findOne({ active_user: 'active_user' })
-    console.log('*************************************', a.current_user_list)
+    
+    console.log( a.current_user_list)
+
+    //Here we are accepting the message from the client side on socket 
     socket.on('message_client', (msg) => {
+        
         var address = socket.handshake.address;
         if (msg == 'Hi') {
-
-
-            console.log('Message emiited &&&&&&&&&&&&&&&&&&&&&&')
+            
+            
             //io.sockets.emit will send the message to all the users including the connected user
             //socket.broadcast.emit will send the message to all teh users except the connected user
             socket.broadcast.emit('message_server', 'Server: How are you ')
         }
+            
         else if (msg == 'Good Morning') {
             //It will send the message to the connected user only
             socket.emit('message_server', `Server: Hi ${data.name} Good Morning`)
         }
         else if (msg == 'Hi how') {
-
             io.emit('message_server', `Server: Vishesh is the not the only person and here is the connected lsit  ${a.current_user_list}`)
         }
 
         else {
-            console.log('Message emiited &&&&&&&&&&&&&&&&&&&&&&')
+         
             // message = obj.name+' : '+msg
             socket.broadcast.emit('message_server', msg)
         }
         console.log('Message form client : ' + address + ' is :  ' + msg)
     });
 
+    //THis will disconnect the connection if the user has left the page 
     socket.on('disconnect', async () => {
         await collection.updateOne({ active_user: 'active_user' }, { $inc: { active_user_no: -1 } })
         await collection.updateOne({ active_user: 'active_user' }, { $pull: { current_user_list: obj.name } })
@@ -320,6 +298,7 @@ io.on('connection', async (socket) => {
 
 });
 
+//this function will give the user list active no. 
 app.get('/getActiveUser', async (req, res) => {
 
     var count = await (collection.findOne({ active_user: 'active_user' }))
