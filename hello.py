@@ -12,24 +12,26 @@ app = Flask(__name__)
 def index():
     return render_template("main.html")
 
+
 board = [""] * 9
 current_player = "X"
 counter=2
 result=''
 def check_winner():
     for i in range(0, 3):
-        if board[i] == board[i + 3] == board[i + 6] != "":
+        if board[i] == board[i + 3] == board[i + 6] != "":  # checking along column
+            return True # true represents win case
+        if board[i * 3] == board[i * 3 + 1] == board[i * 3 + 2] != "": # checking along row
             return True
-        if board[i * 3] == board[i * 3 + 1] == board[i * 3 + 2] != "":
-            return True
-    if board[0] == board[4] == board[8] != "":
+    if board[0] == board[4] == board[8] != "": # checking along diagonal 1
         return True
-    if board[2] == board[4] == board[6] != "":
+    if board[2] == board[4] == board[6] != "": # checking along diagonal 2
         return True
-    return False
+    return False # false will let the code to keep running
 
 def check_tie():
-    return "" not in board
+    return "" not in board # for tie case none of the cells are empty
+
 @app.route('/play', methods=['GET', 'POST'])
 def play_tic_tac_toe():
     global current_player,board,result
@@ -39,11 +41,11 @@ def play_tic_tac_toe():
         if board[cell_index] == "":
             board[cell_index] = current_player
             if check_winner():
-                board = [""] * 9
+                board = [""] * 9 # clears the board
                 result = f"Player {current_player} wins!"
                 return render_template('hello.html', result=result,current_player=current_player, board=board, counter=1)
             elif check_tie():
-                board = [""] * 9
+                board = [""] * 9 # clears the board
                 result = "It's a tie!"
                 return render_template('hello.html',current_player=current_player,result=result, board=board, counter=0)
             else:
@@ -196,58 +198,57 @@ def anime():
 
 
 
-
 ROWS = 8 # we set the numbers of rows and columns as 8*8 respectively for now. but can try to go for custom settings
 COLS = 8
 MINE_PROBABILITY = 0.1  # this here is the chace of a tile to be a mine 
-boardmine = [["" for _ in range(COLS)] for _ in range(ROWS)]  # this is the board that is containing the mines
+board = [["" for _ in range(COLS)] for _ in range(ROWS)]  # this is the board that is containing the mines
 display_board = [['' for _ in range(COLS)] for _ in range(ROWS)]  # this board is to be to displayed
 num_mines = 0
 def generate_board():
-  global boardmine,display_board,num_mines
-  while num_mines < ROWS * COLS * MINE_PROBABILITY: # rows* cols * mine_probability is to get the total number of mines 
+  global board,display_board,num_mines
+  while num_mines < int(ROWS * COLS * MINE_PROBABILITY): # rows* cols * mine_probability is to get the total number of mines 
     row = randint(0, ROWS - 1)
     col = randint(0, COLS - 1)
-    if boardmine[row][col] != -1:  # to prevent placing of a mine on already existing mine
-      boardmine[row][col] = -1 # -1 is to denote a mine in the place
+    if board[row][col] != -1:  # to prevent placing of a mine on already existing mine
+      board[row][col] = -1 # -1 is to denote a mine in the place
       # here we are alotting the tiles as mines
       num_mines += 1
-  return boardmine, display_board
+  return board, display_board
 
 def count_adjacent_mines(board, row, col): 
   count = 0
   for i in range(row - 1, row + 2):
     for j in range(col - 1, col + 2):
-      if 0 <= i < ROWS and 0 <= j < COLS and boardmine[i][j] == -1:
+      if  board[i][j] == -1:
         count += 1
   return count
 
-@app.route("/mine", methods=["GET", "POST"])
+@app.route('/mine', methods=["GET", "POST"])
 def mine():
-  global boardmine,display_board,num_mines
+  global board,display_board,num_mines
   if request.method == "GET":
-    game_over = False  # Initialising the  game state
+    game_over = False  # Initialising the game 
     win = False
     return render_template("minesweeper.html", board=display_board, game_over=game_over, win=win)
   else:
     row = int(request.form["row"])
     col = int(request.form["col"])
-    boardmine, display_board = generate_board()
-    if boardmine[row][col] == -1:
+    board, display_board = generate_board()
+    if board[row][col] == -1:
       # When game finishes all mines are revealed
       for i in range(ROWS):
         for j in range(COLS):
-          if boardmine[i][j] == -1:
+          if board[i][j] == -1:
             display_board[i][j] = "*"
       return render_template("minesweeper.html", board=display_board, game_over=True)
     else:
-      num_mines = count_adjacent_mines(boardmine, row, col)
+      num_mines = count_adjacent_mines(board, row, col)
       display_board[row][col] = str(num_mines) if num_mines else ""
       # Check for win condition if all non-mine cells revealed
       win = True
       for i in range(ROWS):
         for j in range(COLS):
-          if boardmine[i][j] != -1 and display_board[i][j] == "":
+          if board[i][j] != -1 and display_board[i][j] == "":
             win = False
             break
       if win:
@@ -256,12 +257,11 @@ def mine():
 
 @app.route("/play_again")
 def play_again():
-  global boardmine,display_board,num_mines
-  boardmine = [["" for _ in range(COLS)] for _ in range(ROWS)]  # Hidden board with mines
+  global board,display_board,num_mines
+  board = [["" for _ in range(COLS)] for _ in range(ROWS)]  # Hidden board with mines
   display_board = [['' for _ in range(COLS)] for _ in range(ROWS)]  # Board to display
   num_mines = 0 # Reset game state and redirect to main page
   return redirect(url_for("mine")) 
-
 @app.route('/rps')
 def rps():
     return render_template('rpsindex.html')
