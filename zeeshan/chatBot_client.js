@@ -5,30 +5,6 @@ const button = document.getElementById('submit');
 const activeUsertag = document.getElementById('activeUser')
 
 
-// const getOtpBtn = document.getElementById('getOtpBtn');
-// getOtpBtn.addEventListener('click', async () => {
-//     const email = document.getElementById('email').value;
-//     const response = await fetch('/send-otp', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ email: email })
-//     });
-//     if (response.ok) {
-//         console.log('OTP sent successfully');
-//         // After OTP is sent successfully, show the OTP input field
-//         document.getElementById('otp').style.display = 'block';
-//     } else {
-//         console.error('Failed to send OTP');
-//     }
-// });
-
-
-// const otpCheck = document.getElementById('otp').value
-
-
-
 // Fetch user details and display them here we are just asking for the user detail to make them display also 
 async function getUserDetail() {
     try {
@@ -42,7 +18,7 @@ async function getUserDetail() {
 
 getUserDetail();
 
-box.innerHTML += 'Hi, how are you? I am a box and I am connected here<br>';
+box.innerHTML += 'Hi, how are you? Now you are connected to the chatBot<br>';
 
 // Fetch active user count and display it
 async function getActiveUserCount() {
