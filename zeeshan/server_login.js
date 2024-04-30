@@ -63,7 +63,7 @@ async function verifyPassword(safe, hashedPasswordWithSalt) {
 
 //This function will check whether the email is from the college or not 
 function checkEmail(email) {
-    if (email.includes('@smail.iitpkd.ac.in') || email.included('anish@iitpkd.ac.in) {
+    if (email.includes('@smail.iitpkd.ac.in') || email.included('anish@iitpkd.ac.in)) {
         return true
     }
     return false
