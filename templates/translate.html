@@ -3,18 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Translate</title>
+    <style>
+        body{
+            background-image: url("https://images.pexels.com/photos/7130543/pexels-photo-7130543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+            background-size: cover;
+        }
+        form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem auto;
+    width: fit-content;
+  }
+
+  label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="lang"] {
+    padding: 0.8rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  input[type="submit"] {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .translated-text {
+    margin-top: 2rem;
+    font-weight: bold;
+  }
+  .ans{
+    width: 5vw;
+    height: 5vh;
+    background-color: transparent;
+    border: 2px solid black;
+    text-align: center;
+    padding: 5px;
+}
+    </style>
 </head>
 <body>
     <form action="/translate" method="post">
-        <label for="text"> Type text</label>
+        <label for="text">Type text</label>
         <input type="text" id="text" name="text">
-        <label for="lang"> Type language</label>
+        <label for="lang">Type language</label>
         <input type="lang" id="lang" name="lang">
         <input type="submit" value="submit">
-    </form>
-    <div>translated text</div>
-    {{detected}} detected
-    {{text}}
+      </form>
+    <div class="translated-text">translated text</div> <br>
+    <span class="ans">{{text}}</span>
+    <div>{{detected}}</div> detected
 </body>
 </html>
