@@ -9,20 +9,26 @@
             /* background-color: black; */
             /* color: white; */
         /* } */
-        body{
-            background-image: url(/static/asset/bg.jpg);
-            background-size: cover;
-            background-color: #000;
-            /* display: grid;
-            
-            grid-template-areas: "head head head head head"
-            "intask intask intask intask intask"
-            "empty heading task submit empty"
-            "com com com com com"
-            "at at at at at"
-            "ct ct ct ct ct"; */
-            /* background-color: red; */
-        }
+        body  {
+    background-image: url('https://static.pexels.com/photos/414171/pexels-photo-414171.jpeg');
+  background-size:cover;
+        animation: slidein 50s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;              
+}
+
+@-webkit-keyframes slidein {
+from {background-position: top; background-size:3000px; }
+to {background-position: -100px 0px;background-size:2750px;}
+}
+
+@keyframes slidein {
+from {background-position: top;background-size:3000px; }
+to {background-position: -100px 0px;background-size:2750px;}
+
+}
+
         .invi{
             opacity: 0;
         }
@@ -92,21 +98,25 @@
             display: flex;
         }
         .todo-form {
-            background-color: #e0f7ff;
+            /* background-color: #e0f7ff; */
+            background-color: transparent;
+            background-color: rgba(255, 255, 255, 0.5);
+
             border: 1px solid #cccccc;
             border-radius: 5px; 
             padding: 20px;
-            margin: 0 auto;
+            margin: 10px auto;
             width: 50%; 
         }
 
         .todo-form input[type="text"] {
             display: block; 
-            width: 100%; 
+            width: 90%; 
             padding: 10px;
             border: 1px solid #cccccc; 
             border-radius: 3px; 
             margin-bottom: 15px; 
+            background-color: rgba(255, 255, 255, 0.5);
         }
         .todo-form button {
             background-color: #3399ff;
@@ -190,65 +200,69 @@
     </style>
 </head>
 <body>
+  <div class="center">
+
     <h1 class="head">To-Do List</h1>
     <div class="snowflakes" aria-hidden="true">
-        <div class="snowflake">❅</div>
-        <div class="snowflake">❅</div>
-        <div class="snowflake">❄️</div>
-        <div class="snowflake">❆</div>
-        <div class="snowflake">❆</div>
-        <div class="snowflake">❄️</div>
-        <div class="snowflake">❅</div>
-        <div class="snowflake">❆</div>
-      </div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❄️</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❄️</div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+    </div>
     <h3 class="it">Incomplete Tasks</h3>
     <ul class="st">
-        {% for task in tasks %}
-            <li class="it">
-                <h2 class="a">{{ task[2] }}</h2>  <h3>{{ task[0] }} </h3><br>  <div class="links">  <a class="l" href="/todo/complete_task/{{ loop.index0 }}">Complete</a>
-    <a class="l" href="/todo/delete_task/{{ loop.index0 }}">Delete</a>
-  </div>   {{ task[1] }}
-                <form method="POST" action="/todo/update_task/{{ loop.index0 }}" class="update-form hidden">
-                    <input type="hidden" name="task_index" value="{{ loop.index0 }}">
-                    <input type="text" name="newheading" placeholder="Update task heading">
-                    <input type="text" name="newcontent" placeholder="Update task content">
-                    <button type="submit">Update Task</button>
-                </form>
-            </li>
-        {% endfor %}
+      {% for task in tasks %}
+      <li class="it">
+        <h2 class="a">{{ task[2] }}</h2>  <h3>{{ task[0] }} </h3><br>  <div class="links">  <a class="l" href="/todo/complete_task/{{ loop.index0 }}">Complete</a>
+          <a class="l" href="/todo/delete_task/{{ loop.index0 }}">Delete</a>
+        </div>   {{ task[1] }}
+        <form method="POST" action="/todo/update_task/{{ loop.index0 }}" class="update-form hidden">
+          <input type="hidden" name="task_index" value="{{ loop.index0 }}">
+          <input type="text" name="newheading" placeholder="Update task heading">
+          <input type="text" name="newcontent" placeholder="Update task content">
+          <button type="submit">Update Task</button>
+        </form>
+      </li>
+      {% endfor %}
     </ul>
-
+    
     <form action="/todo/add_task" method="post" class="todo-form">
-        <input type="text" name="heading" placeholder="Enter Task heading">
-        <input type="text" name="content" placeholder="Enter task">
-        <button type="submit">Add Task</button>
+      <input type="text" name="heading" placeholder="Enter Task heading">
+      <input type="text" name="content" placeholder="Enter task">
+      <button type="submit">Add Task</button>
     </form>
     <h3>Completed Tasks</h3>
     <ul class="st">
-        {% for i in completed[::-1][:10] %}
-            <li> <h3>{{ i[2]}} </h3>{{ i[0] }} (Completed) {{i[1]}}</li>
-        {% endfor %}
+      {% for i in completed[::-1][:10] %}
+      <li> <h3>{{ i[2]}} </h3>{{ i[0] }} (Completed) {{i[1]}}</li>
+      {% endfor %}
     </ul>
     <div class="display">
-
-        <div class="stick">
-            <div class="big">
-                <button class="task">All Tasks</button>
-                <ul class="st invi invi1">
-                    {% for i in tasks %}
-                    <<li> <h3>{{ i[2]}} </h3>{{ i[0] }} {{i[1]}}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="com">
-                <button class="comp">All Completed Tasks</button>
-                <ul class="st invi invi2">
-                    {% for i in completed %}
-                    <li> <h3>{{ i[2]}} </h3>{{ i[0] }}  {{i[1]}}</li>
-                    {% endfor %}
-                </ul>
-            </div>
+      
+      <div class="stick">
+        <div class="big">
+          <button class="task">All Tasks</button>
+          <ul class="st invi invi1">
+            {% for i in tasks %}
+            <<li> <h3>{{ i[2]}} </h3>{{ i[0] }} {{i[1]}}</li>
+            {% endfor %}
+          </ul>
         </div>
+        <div class="com">
+          <button class="comp">All Completed Tasks</button>
+          <ul class="st invi invi2">
+            {% for i in completed %}
+            <li> <h3>{{ i[2]}} </h3>{{ i[0] }}  {{i[1]}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
     </div>
-</body>
-</html>
+  </div>
+  </body>
+  </html>
+  
