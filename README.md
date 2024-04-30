@@ -1,9 +1,10 @@
 # Project Name: ThatAwesomeProject
 
 ## Contributors
--Vishesh : 112301037
--Zeeshan : 112301040
--Aswin   : 132301008
+
+- Zeeshan: 112301040
+- Vishesh: 112301037
+- Aswin: 132301008
 
 ## Overview
 ThatAwesomeProject is a multifunctional toolset designed to cater to various needs, ranging from gaming to everyday utility tools, along with a community forum for enhanced communication.
