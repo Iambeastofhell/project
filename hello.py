@@ -267,7 +267,7 @@ def mine():
     row = int(request.form["row"])
     col = int(request.form["col"])
     boardm, display_board = generate_board()
-    if board[row][col] == -1:
+    if boardm[row][col] == -1:
       # When game finishes all mines are revealed
       for i in range(ROWS):
         for j in range(COLS):
@@ -275,7 +275,7 @@ def mine():
             display_board[i][j] = "*"
       return render_template("minesweeper.html", boardm=display_board, game_over=True)
     else:
-      num_mines = count_adjacent_mines(board, row, col)
+      num_mines = count_adjacent_mines(boardm, row, col)
       display_board[row][col] = str(num_mines) if num_mines else ""
       # Check for win condition if all non-mine cells revealed
       win = True

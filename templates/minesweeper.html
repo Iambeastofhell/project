@@ -197,7 +197,7 @@
     {% for row in range(8) %}
       <tr>
         {% for col in range(8) %}
-          <td class="cell" onclick="handleClick({{ row }}, {{ col }})">{{ board[row][col] }}</td>
+          <td class="cell" onclick="handleClick({{ row }}, {{ col }})">{{ boardm[row][col] }}</td>
         {% endfor %}
       </tr>
     {% endfor %}
